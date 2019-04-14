@@ -1,5 +1,6 @@
 package com.testboard.biz.board;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BoardVO {
@@ -35,8 +36,9 @@ public class BoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getRegDate() {
-		return regDate;
+	public String getRegDate() {
+		SimpleDateFormat simpleRegDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		return simpleRegDate.format(regDate);
 	}
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
