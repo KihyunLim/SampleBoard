@@ -6,7 +6,7 @@
 	<!-- Alias 설정 -->
 	<typeAliases>
 		<typeAlias alias="board" type="com.testboard.biz.board.BoardVO"></typeAlias>
-		<typeAlias alias="user" type="com.testboard.biz.board.UserVO"></typeAlias>
+		<typeAlias alias="user" type="com.testboard.biz.user.UserVO"></typeAlias>
 	</typeAliases>
 	
 	<!-- Sql Mapper 설정 -->
