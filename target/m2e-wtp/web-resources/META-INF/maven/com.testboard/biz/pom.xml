@@ -41,6 +41,13 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.4</version>
 		</dependency>
+		
+		<!-- Jackson2 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.7.3</version>
+		</dependency>
 	
 		<!-- Spring -->
 		<dependency>
