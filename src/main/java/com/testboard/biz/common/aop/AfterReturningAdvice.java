@@ -13,6 +13,10 @@ public class AfterReturningAdvice {
 	public void afterLog(JoinPoint jp, Object returnObj) {
 		String method = jp.getSignature().getName();
 		
-		System.out.println("[AfterReturning] " + method + "() 메소드 리턴값 : " + returnObj.toString());
+		if(returnObj != null) {
+			System.out.println("[AfterReturning] " + method + "() 메소드 리턴값 : " + returnObj.toString());
+		} else {
+			System.out.println("[AfterReturning] " + method + "() 메소드 리턴값 : null");
+		}
 	}
 }

@@ -42,26 +42,32 @@ public class LoginController {
 			return result;
 		}
 		
-		UserVO user = userService.getUserInfo(vo);
-		if(user != null) {
-			session.setAttribute("name", vo.getName());
-			session.setAttribute("userId", vo.getUserId());
+		try {
+			UserVO user = userService.getUserInfo(vo);
+			
+			if(user == null) {
+				throw new NullPointerException("User inforamtion not found!!"); 
+			}
 			
 			if(vo.getPassword().equals(user.getPassword())) {
+				session.setAttribute("name", vo.getName());
+				session.setAttribute("userId", vo.getUserId());
+				
 				result.put("result", true);
 				result.put("message", "");
 			} else {
 				result.put("result", false);
 				result.put("message", "비밀번호가 일지하지 않습니다.");
 			}
+		} catch(NullPointerException e) {
+			System.out.println(e.getMessage());
+//			e.printStackTrace();							// 이건 로깅파일?? 요걸로 맞춰주면 좋을듯한뎁
 			
-			return result;
-		} else {
 			result.put("result", false);
 			result.put("message", "등록된 아이디가 없습니다.");
-			
-			return result;
 		}
+		
+		return result;
 	}
 	
 	@RequestMapping("/logout.do")

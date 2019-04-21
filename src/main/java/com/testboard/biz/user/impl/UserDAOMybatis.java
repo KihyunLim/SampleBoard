@@ -13,6 +13,6 @@ public class UserDAOMybatis {
 	private SqlSessionTemplate mybatis;
 	
 	public UserVO getUserInfo(UserVO vo) {
-		return (UserVO) mybatis.selectOne("UseresDAO.getUserInfo", vo);
+		return (UserVO) mybatis.selectOne("UseresDAO.getUserInfo", vo); 
 	}
 }
