@@ -14,8 +14,8 @@ public class BoardDAOMybatis {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
-	public void insertBoard(BoardVO vo) {
-		
+	public int insertBoard(BoardVO vo) {
+		return mybatis.insert("BoardDAO.insertBoard", vo);
 	}
 	
 	public void updateBoard(BoardVO vo) {

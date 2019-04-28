@@ -4,7 +4,27 @@
 
 <mapper namespace="BoardDAO">
 
+	<insert id="insertBoard">
+		<![CDATA[
+			INSERT INTO
+				BOARD(
+					WRITER,
+					TITLE,
+					CONTENT
+				)
+			VALUES(
+				#{writer},
+				#{title},
+				#{content}
+			);
+		]]>
+	</insert>
+
 	<select id="getBoardList" resultType="board">
-		SELECT * FROM BOARD ORDER BY SEQ DESC;
+		SELECT 
+			* 
+		FROM 
+			BOARD 
+		ORDER BY SEQ DESC;
 	</select>
 </mapper>

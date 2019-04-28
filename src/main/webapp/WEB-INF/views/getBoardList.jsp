@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="<c:url value="/resources/js/lib/jquery-3.3.1.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/getBoardList.js"/>"></script>
 <title>목록 조회</title>
 </head>
 <body>
@@ -93,7 +95,7 @@
 		</tr> --%>
 	</table>
 	<br>
-	<a href="insertBoard.jsp">게시글 작성</a>
+	<input type="button" id="btnWrite" value="게시글 작성"></input>
 </center>
 
 </body>

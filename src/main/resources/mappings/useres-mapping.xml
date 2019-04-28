@@ -6,7 +6,12 @@
 
 	<select id="getUserInfo" resultType="user">
 		<![CDATA[
-			SELECT * FROM USERES WHERE USERID=#{userId};
+			SELECT 
+				* 
+			FROM 
+				USERES 
+			WHERE 
+				USERID=#{userId};
 		]]>
 	</select>
 </mapper>
