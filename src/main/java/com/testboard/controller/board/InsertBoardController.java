@@ -43,7 +43,6 @@ public class InsertBoardController {
 		
 		try {
 			int res = boardService.insertBoard(vo);
-			System.out.println(res);
 			
 			if(res > -1) {
 				result.put("result", true);

@@ -42,7 +42,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="새글 등록" id="btnRegist" />
+					<input type="button" value="새글 등록" id="btnRegist" />
 				</td>
 			</tr>
 		</table>
