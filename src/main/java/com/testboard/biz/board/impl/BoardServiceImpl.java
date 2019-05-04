@@ -31,7 +31,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	public BoardVO getBoard(BoardVO vo) {
-		return vo;
+		return boardDAO.getBoard(vo);
 	}
 	
 	public List<BoardVO> getBoardList(BoardVO vo) {

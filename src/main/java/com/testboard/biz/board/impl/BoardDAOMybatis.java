@@ -31,7 +31,7 @@ public class BoardDAOMybatis {
 	}
 	
 	public BoardVO getBoard(BoardVO vo) {
-		return vo;
+		return mybatis.selectOne("BoardDAO.getBoard", vo);
 	}
 	
 	public List<BoardVO> getBoardList(BoardVO vo) {

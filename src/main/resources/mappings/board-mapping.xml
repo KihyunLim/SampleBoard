@@ -20,6 +20,15 @@
 		]]>
 	</insert>
 
+	<select id="getBoard" resultType="board">
+		SELECT
+			*
+		FROM
+			BOARD
+		WHERE
+			seq = #{seq};
+	</select>
+
 	<select id="getBoardList" resultType="board">
 		SELECT 
 			* 
