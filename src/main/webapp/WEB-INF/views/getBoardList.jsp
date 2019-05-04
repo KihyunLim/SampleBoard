@@ -53,7 +53,7 @@
 	</form> --%>
 	<!-- 검색 종료 -->
 	
-	<table border="1" cellpadding="0" cellspacing="0" width="700">
+	<table id="tableBoardList" border="1" cellpadding="0" cellspacing="0" width="700">
 		<thead>
 			<tr>
 				<th bgcolor="orange" width="100">번호</th>
@@ -63,19 +63,6 @@
 				<th bgcolor="orange" width="100">조회수</th>
 			</tr>
 		</thead>
-		
-		<tbody id="tbodyBoardList">
-			<c:forEach items="${boardList }" var="board">
-			<tr>
-				<td>${board.seq }</td>
-				<td align="left"><a href="getBoard.do?seq=${board.seq }">${board.title }</a></td>
-	<%-- 			<td align="left"><a href="getBoard.do?seq=${board.seq }&page=${searchInfo.curPage}&searchCondition=${searchInfo.searchCondition}&searchKeyword=${searchInfo.searchKeyword}">${board.title }</a></td> --%>
-				<td>${board.writer }</td>
-				<td>${board.regDate }</td>
-				<td>${board.cnt }</td>
-			</tr>
-			</c:forEach>
-		</tbody>
 		
 		<%-- <tfoot>
 			<tr>
