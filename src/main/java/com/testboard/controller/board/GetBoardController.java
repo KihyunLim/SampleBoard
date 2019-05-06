@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.testboard.biz.board.BoardService;
 import com.testboard.biz.board.BoardVO;
@@ -16,8 +17,12 @@ public class GetBoardController {
 	
 	@RequestMapping("/getBoard.do")
 	public String getBoard(BoardVO vo, Model model) {
-		model.addAttribute("board", boardService.getBoard(vo));
-		
 		return "getBoard";
+	}
+	
+	@RequestMapping("/getBoardJSON.do")
+	@ResponseBody
+	public BoardVO getBoardJSON(BoardVO vo) {
+		return boardService.getBoard(vo);
 	}
 }
