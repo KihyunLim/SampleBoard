@@ -26,8 +26,8 @@ public class BoardDAOMybatis {
 		
 	}
 	
-	public void updateBoardCnt(BoardVO vo) {
-		
+	public int updateBoardCnt(BoardVO vo) {
+		return mybatis.update("BoardDAO.updateBoardCnt", vo);
 	}
 	
 	public BoardVO getBoard(BoardVO vo) {

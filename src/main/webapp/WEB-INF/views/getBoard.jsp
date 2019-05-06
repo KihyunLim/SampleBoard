@@ -53,9 +53,9 @@
 		</table>
 	</form>
 	<hr>
-	<a href="insertBoard.jsp">글등록</a>&nbsp;&nbsp;&nbsp;
+	<a href="insertBoard.do">글등록</a>&nbsp;&nbsp;&nbsp;
 	<a href="deleteBoard.do?seq=${board.seq }">글삭제</a>&nbsp;&nbsp;&nbsp;
-	<a href="getBoardList.do?page=${searchInfo.curPage }&searchCondition=${searchInfo.searchCondition}&searchKeyword=${searchInfo.searchKeyword}">글목록</a>
+	<a id="aGetBoardList" href="getBoardList.do">글목록</a>
 </center>
 
 </body>

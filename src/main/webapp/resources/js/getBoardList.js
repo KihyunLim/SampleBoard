@@ -4,6 +4,7 @@
 
 $(function(){
 	//나중에 init함수로 따로 만들어서 페이지 이동용 공통함수로 사용할 수 잇도록 분리ㄱ
+	// url에 변수처리해서 페이지 같은 파람 이어 전달
 	$.ajax({
 		type : "POST",
 		url : "getBoardListJSON.do",

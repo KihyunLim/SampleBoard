@@ -26,8 +26,8 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 	
-	public void updateBoardCnt(BoardVO vo) {
-		
+	public int updateBoardCnt(BoardVO vo) {
+		return boardDAO.updateBoardCnt(vo);
 	}
 	
 	public BoardVO getBoard(BoardVO vo) {

@@ -26,7 +26,9 @@ $(function(){
 		}
 	})
 	
-	$("#btnWrite").click(function(e){
-		window.location.href = "insertBoard.do";
+	$("#aGetBoardList").click(function(e){
+		var param = "?파람 뒤에 이을꺼";
+		
+		window.location.href = "getBoardList.do";
 	});
 });

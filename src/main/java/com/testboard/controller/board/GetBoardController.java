@@ -23,6 +23,16 @@ public class GetBoardController {
 	@RequestMapping("/getBoardJSON.do")
 	@ResponseBody
 	public BoardVO getBoardJSON(BoardVO vo) {
-		return boardService.getBoard(vo);
+		BoardVO result = boardService.getBoard(vo);
+		
+		try {
+			if(boardService.updateBoardCnt(vo) > 0) {
+				result.setCnt(result.getCnt() + 1);
+			}
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return result;
 	}
 }

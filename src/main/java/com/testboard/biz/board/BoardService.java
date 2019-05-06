@@ -10,7 +10,7 @@ public interface BoardService {
 
 	void deleteBoard(BoardVO vo);
 
-	void updateBoardCnt(BoardVO vo);
+	int updateBoardCnt(BoardVO vo);
 
 	BoardVO getBoard(BoardVO vo);
 

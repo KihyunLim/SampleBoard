@@ -28,6 +28,17 @@
 		WHERE
 			seq = #{seq};
 	</select>
+	
+	<update id="updateBoardCnt">
+		<![CDATA[
+			UPDATE 
+				BOARD 
+			SET 
+				CNT = CNT + 1 
+			WHERE 
+				SEQ=#{seq};
+		]]>
+	</update>
 
 	<select id="getBoardList" resultType="board">
 		SELECT 
