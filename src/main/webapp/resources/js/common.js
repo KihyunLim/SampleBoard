@@ -10,13 +10,32 @@ function getUrlParams() {
 };
 
 // 객체를 url 파라미터 형식 string로 변환
-function setUrlParams(data) {
+function setParams(data, type) {
 	var param = "";
 	
+	if(typeof data != "object") {
+		console.log("setParams : data is not object!!");
+		return "";
+	} else if($.isEmptyObject(data)) {
+		console.log("setParams : data is empty object!!");
+		return "";
+	}
+	
 	Object.keys(data).forEach(function(key, index){
-		param += (key + "=" + data[key]);
+		if(index == (Object.keys(data).length - 1)) {
+			param += (key + "=" + data[key]);
+		} else {
+			param += (key + "=" + data[key] + "&");
+		}
 	});
 	
 	console.log(param);
-	return "?" + param;
+	if(type == "POST") {
+		return param;
+	} else if(type == "GET") {
+		return "?" + param;
+	} else {
+		console.log("setParams : type is undefined!!");
+		return "";
+	}
 }

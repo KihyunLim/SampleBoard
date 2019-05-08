@@ -19,7 +19,7 @@
 	<h1>글 상세</h1>
 	<a href="logout.do">Log-out</a>
 	<hr>
-	<form action="updateBoard.do" method="post">
+	<form>
 		<table border="1" cellpadding="0" cellspacing="0">
 			<tr>
 				<td bgcolor="orange" width="70">제목</td>
@@ -47,7 +47,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" id="btnUpdate" value="글 수정" />
+					<input type="button" id="btnUpdate" value="글 수정" />
 				</td>
 			</tr>
 		</table>
