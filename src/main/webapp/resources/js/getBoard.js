@@ -3,6 +3,8 @@
  */
 
 $(function(){
+	var seq = 0;
+	
 	//나중에 init함수로 따로 만들어서 페이지 이동용 공통함수로 사용할 수 잇도록 분리ㄱ
 	(function init() {
 		var data = setParams(getUrlParams(), "POST");
@@ -14,6 +16,7 @@ $(function(){
 			dataType : "json",
 			success : function(res, status, xhr) {
 				console.log(res);
+				seq = res.seq;
 				
 				if(getUserId != res.writer) {
 					$(".myBoard").prop("readonly", true);
@@ -33,11 +36,9 @@ $(function(){
 	
 	$("#btnUpdate").click(function(){
 		var data = {
+				"seq"			: seq,
 				"title" 		: $("#title").val(),
-				"writer" 	: $("#writer").text(),
-				"content" 	: $("#content").val(),
-				"regDate" 	: $("#regDate").text(),
-				"cnt" 		: $("#cnt").text()
+				"content" 	: $("#content").val()
 		};
 		
 		$.ajax({
@@ -46,7 +47,13 @@ $(function(){
 			data : setParams(data, "POST"),
 			dataType : "json",
 			success : function(res, status, xhr) {
+				console.log(res);
 				
+				if(res.result) {
+					location.reload();
+				} else {
+					alert(res.message);
+				}
 			},
 			error : function(jqXHR, textSatus, errorThrown) {
 				console.log("error!!");

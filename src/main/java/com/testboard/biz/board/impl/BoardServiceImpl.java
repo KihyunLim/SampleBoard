@@ -14,20 +14,20 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDAOMybatis boardDAO;
 	
-	public int insertBoard(BoardVO vo) {
-		return boardDAO.insertBoard(vo);
+	public void insertBoard(BoardVO vo) {
+		boardDAO.insertBoard(vo);
 	}
 	
 	public void updateBoard(BoardVO vo) {
-		
+		boardDAO.updateBoard(vo);
 	}
 	
 	public void deleteBoard(BoardVO vo) {
 		
 	}
 	
-	public int updateBoardCnt(BoardVO vo) {
-		return boardDAO.updateBoardCnt(vo);
+	public void updateBoardCnt(BoardVO vo) {
+		boardDAO.updateBoardCnt(vo);
 	}
 	
 	public BoardVO getBoard(BoardVO vo) {

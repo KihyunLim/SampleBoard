@@ -26,9 +26,8 @@ public class GetBoardController {
 		BoardVO result = boardService.getBoard(vo);
 		
 		try {
-			if(boardService.updateBoardCnt(vo) > 0) {
-				result.setCnt(result.getCnt() + 1);
-			}
+			boardService.updateBoardCnt(vo);
+			result.setCnt(result.getCnt() + 1);
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
 		}

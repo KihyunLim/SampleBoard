@@ -5,28 +5,21 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.testboard.biz.board.BoardService;
 import com.testboard.biz.board.BoardVO;
 
 @Controller
-public class InsertBoardController {
+public class UpdateBoardController {
 
 	@Autowired
 	private BoardService boardService;
 	
-	@RequestMapping(value="/insertBoard.do", method=RequestMethod.GET)
-	public String insertBoardView(BoardVO vo) {
-		return "insertBoard";
-	}
-	
-	@RequestMapping(value="/insertBoard.do", method=RequestMethod.POST)
+	@RequestMapping("/updateBoard.do")
 	@ResponseBody
-	public Map<String, Object> insertBoard(BoardVO vo) {
+	public Map<String, Object> updateBoard(BoardVO vo) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
 		if(vo.getTitle() == null || vo.getTitle().equals("")) {
@@ -42,15 +35,15 @@ public class InsertBoardController {
 		}
 		
 		try {
-			boardService.insertBoard(vo);
+			boardService.updateBoard(vo);
 			
 			result.put("result", true);
-			result.put("message", "게시글 등록에 성공했습니다.");
+			result.put("message", "게시글 수정에 성공했습니다.");
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
 			
 			result.put("result", false);
-			result.put("message", "게시글 등록에 실패했습니다.");
+			result.put("message", "게시글 수정에 실패했습니다.");
 		}
 		
 		return result;

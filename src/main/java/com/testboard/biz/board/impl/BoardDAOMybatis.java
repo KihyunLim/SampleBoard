@@ -14,20 +14,20 @@ public class BoardDAOMybatis {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
-	public int insertBoard(BoardVO vo) {
-		return mybatis.insert("BoardDAO.insertBoard", vo);
+	public void insertBoard(BoardVO vo) {
+		mybatis.insert("BoardDAO.insertBoard", vo);
 	}
 	
 	public void updateBoard(BoardVO vo) {
-		
+		mybatis.update("BoardDAO.updateBoard", vo);
 	}
 	
 	public void deleteBoard(BoardVO vo) {
 		
 	}
 	
-	public int updateBoardCnt(BoardVO vo) {
-		return mybatis.update("BoardDAO.updateBoardCnt", vo);
+	public void updateBoardCnt(BoardVO vo) {
+		mybatis.update("BoardDAO.updateBoardCnt", vo);
 	}
 	
 	public BoardVO getBoard(BoardVO vo) {
