@@ -53,6 +53,15 @@
 				SEQ = #{seq};
 		]]>
 	</update>
+	
+	<delete id="deleteBoard">
+		<![CDATA[
+			DELETE FROM
+				BOARD
+			WHERE
+				SEQ = #{seq};
+		]]>
+	</delete>
 
 	<select id="getBoardList" resultType="board">
 		SELECT 

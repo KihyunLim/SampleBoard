@@ -23,7 +23,7 @@ public class BoardDAOMybatis {
 	}
 	
 	public void deleteBoard(BoardVO vo) {
-		
+		mybatis.delete("BoardDAO.deleteBoard", vo);
 	}
 	
 	public void updateBoardCnt(BoardVO vo) {

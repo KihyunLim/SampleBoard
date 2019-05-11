@@ -23,7 +23,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	public void deleteBoard(BoardVO vo) {
-		
+		boardDAO.deleteBoard(vo);
 	}
 	
 	public void updateBoardCnt(BoardVO vo) {

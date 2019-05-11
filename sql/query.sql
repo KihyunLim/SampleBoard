@@ -18,6 +18,8 @@ CREATE TABLE BOARD(
 
 select * from board;
 
+update board set cnt=cnt+1 where seq=5;
+
 describe board;
 
 insert into board (
