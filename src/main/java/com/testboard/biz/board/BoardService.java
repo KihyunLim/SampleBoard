@@ -2,6 +2,8 @@ package com.testboard.biz.board;
 
 import java.util.List;
 
+import com.testboard.biz.common.paging.Criteria;
+
 public interface BoardService {
 
 	void insertBoard(BoardVO vo);
@@ -14,8 +16,8 @@ public interface BoardService {
 
 	BoardVO getBoard(BoardVO vo);
 
-	List<BoardVO> getBoardList(BoardVO vo, String condition, String keyword);
+	List<BoardVO> getBoardList(Criteria cri, String condition, String keyword);
 
-	int getBoardListCount(BoardVO vo);
+	int getBoardListCount(Criteria cri, String condition, String keyword);
 
 }

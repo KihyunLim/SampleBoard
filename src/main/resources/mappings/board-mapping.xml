@@ -79,6 +79,26 @@
 		<if test="condition == 'CONTENT'">
 			AND CONTENT LIKE #{keyword}
 		</if>
-		ORDER BY SEQ DESC;
+		ORDER BY SEQ DESC
+		LIMIT #{pageStart}, #{perPageNum};
+	</select>
+	
+	<select id="getBoardListCount" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM 
+			BOARD 
+		WHERE
+			1=1
+		<if test="condition == 'ALL'">
+			AND (TITLE LIKE #{keyword} OR CONTENT LIKE #{keyword})
+		</if>
+		<if test="condition == 'TITLE'">
+			AND TITLE LIKE #{keyword}
+		</if>
+		<if test="condition == 'CONTENT'">
+			AND CONTENT LIKE #{keyword}
+		</if>
+		;
 	</select>
 </mapper>

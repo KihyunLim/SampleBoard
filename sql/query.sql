@@ -17,6 +17,31 @@ CREATE TABLE BOARD(
 ) engine=InnoDB default character set = utf8;
 
 select * from board;
+select * from board where 1=1 and (title like '%수정%' or content like '%수정%');
+select * from board limit 2,2;
+
+SELECT 
+			* 
+		FROM 
+			BOARD 
+		WHERE
+			1=1
+		 
+		 
+		 
+			AND CONTENT LIKE '%수정%'
+		 
+		ORDER BY SEQ DESC;
+
+SELECT 
+			COUNT(*) 
+		FROM 
+			BOARD 
+		WHERE
+			1=1
+		 
+			AND (TITLE LIKE '%%' OR CONTENT LIKE '%%')
+		;
 
 update board set cnt=cnt+1 where seq=5;
 

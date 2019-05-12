@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.testboard.biz.board.BoardService;
 import com.testboard.biz.board.BoardVO;
+import com.testboard.biz.common.paging.Criteria;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
@@ -34,11 +35,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.getBoard(vo);
 	}
 	
-	public List<BoardVO> getBoardList(BoardVO vo, String condition, String keyword) {
-		return boardDAO.getBoardList(vo, condition, keyword);
+	public List<BoardVO> getBoardList(Criteria cri, String condition, String keyword) {
+		return boardDAO.getBoardList(cri, condition, keyword);
 	}
 	
-	public int getBoardListCount(BoardVO vo) {
-		return 1;
+	public int getBoardListCount(Criteria cri, String condition, String keyword) {
+		return boardDAO.getBoardListCount(cri, condition, keyword);
 	}
 }

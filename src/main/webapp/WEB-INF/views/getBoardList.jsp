@@ -36,7 +36,7 @@
 	</form>
 	<!-- 검색 종료 -->
 	
-	<table id="tableBoardList" border="1" cellpadding="0" cellspacing="0" width="700">
+	<table border="1" cellpadding="0" cellspacing="0" width="700">
 		<thead>
 			<tr>
 				<th bgcolor="orange" width="100">번호</th>
@@ -47,28 +47,19 @@
 			</tr>
 		</thead>
 		
-		<%-- <tfoot>
+		<tbody id="tbodyBoardList"></tbody>
+		
+		<tfoot>
 			<tr>
 				<td colspan="5" align="center">
-					<c:if test="${pageMaker.prev }">
-						<a href="getBoardList.do${pageMaker.makeQuery(pageMaker.startPage - 1) }">이전</a>
-					</c:if>
-				
-					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="page">
-					<c:if test="${page eq searchInfo.curPage }">
-					[${page }]
-					</c:if>
-					<c:if test="${page ne searchInfo.curPage }">
-					<a href="getBoardList.do?page=${page }&searchCondition=${searchInfo.searchCondition}&searchKeyword=${searchInfo.searchKeyword}">[${page }]</a>
-					</c:if>
-					</c:forEach>
-					
-					<c:if test="${pageMaker.next }">
-						<a href="getBoardList.do${pageMaker.makeQuery(pageMaker.endPage + 1) }">다음</a>
-					</c:if>
+					<a id="aPrev" href="getBoardList.do">이전</a>
+					<span id="spanPageWrap">
+						<!-- <a href="getBoardList.do"></a> -->
+					</span>				
+					<a id="aNext" href="getBoardList.do">다음</a>
 				</td>
 			</tr>
-		</tfoot> --%>
+		</tfoot>
 	</table>
 	<br>
 	<input type="button" id="btnWrite" value="게시글 작성"></input>

@@ -1,6 +1,8 @@
 package com.testboard.controller.board;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.testboard.biz.board.BoardService;
 import com.testboard.biz.board.BoardVO;
+import com.testboard.biz.common.paging.Criteria;
+import com.testboard.biz.common.paging.PageMaker;
 
 @Controller
 public class ListController {
@@ -25,11 +29,20 @@ public class ListController {
 	
 	@RequestMapping(value="/getBoardListJSON.do")
 	@ResponseBody
-	public List<BoardVO> getBoardListJSON(BoardVO vo, 
+	public Map<String, Object> getBoardListJSON(Criteria cri, 
 			@RequestParam(value="searchCondition", defaultValue="ALL", required=false) String condition,
 			@RequestParam(value="searchKeyword", required=false) String keyword
 			) {
+		Map<String, Object> result = new HashMap<String, Object>();
 		
-		return boardService.getBoardList(vo, condition, keyword); 
+		List<BoardVO> boardList = boardService.getBoardList(cri, condition, keyword);
+		result.put("boardList", boardList);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(boardService.getBoardListCount(cri, condition, keyword));
+		result.put("pageMaker", pageMaker);
+		
+		return result;
 	}
 }
