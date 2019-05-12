@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.testboard.biz.board.BoardService;
@@ -24,7 +25,11 @@ public class ListController {
 	
 	@RequestMapping(value="/getBoardListJSON.do")
 	@ResponseBody
-	public List<BoardVO> getBoardListJSON(BoardVO vo) {
-		return boardService.getBoardList(vo); 
+	public List<BoardVO> getBoardListJSON(BoardVO vo, 
+			@RequestParam(value="searchCondition", defaultValue="ALL", required=false) String condition,
+			@RequestParam(value="searchKeyword", required=false) String keyword
+			) {
+		
+		return boardService.getBoardList(vo, condition, keyword); 
 	}
 }

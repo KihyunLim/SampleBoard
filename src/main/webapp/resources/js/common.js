@@ -30,9 +30,9 @@ function setParams(data, type) {
 	});
 	
 	console.log(param);
-	if(type == "POST") {
+	if(type == "OBJ") {
 		return param;
-	} else if(type == "GET") {
+	} else if(type == "URL") {
 		return "?" + param;
 	} else {
 		console.log("setParams : type is undefined!!");

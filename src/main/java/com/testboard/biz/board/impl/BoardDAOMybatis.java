@@ -1,6 +1,8 @@
 package com.testboard.biz.board.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +36,13 @@ public class BoardDAOMybatis {
 		return mybatis.selectOne("BoardDAO.getBoard", vo);
 	}
 	
-	public List<BoardVO> getBoardList(BoardVO vo) {
-		return mybatis.selectList("BoardDAO.getBoardList", vo); 
+	public List<BoardVO> getBoardList(BoardVO vo, String condition, String keyword) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("vo", vo);
+		param.put("condition", condition);
+		param.put("keyword", "%" + keyword + "%");
+		
+		return mybatis.selectList("BoardDAO.getBoardList", param); 
 	}
 	
 	public int getBoardListCount(BoardVO vo) {

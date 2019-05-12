@@ -34,8 +34,8 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.getBoard(vo);
 	}
 	
-	public List<BoardVO> getBoardList(BoardVO vo) {
-		return boardDAO.getBoardList(vo);
+	public List<BoardVO> getBoardList(BoardVO vo, String condition, String keyword) {
+		return boardDAO.getBoardList(vo, condition, keyword);
 	}
 	
 	public int getBoardListCount(BoardVO vo) {

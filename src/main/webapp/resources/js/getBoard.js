@@ -9,7 +9,7 @@ $(function(){
 	
 	//나중에 init함수로 따로 만들어서 페이지 이동용 공통함수로 사용할 수 잇도록 분리ㄱ
 	function getBoardJSON() {
-		var data = setParams(getUrlParams(), "POST");
+		var data = setParams(getUrlParams(), "OBJ");
 		
 		$.ajax({
 			type : "POST",
@@ -47,7 +47,7 @@ $(function(){
 		$.ajax({
 			type : "POST",
 			url : "updateBoard.do",
-			data : setParams(data, "POST"),
+			data : setParams(data, "OBJ"),
 			dataType : "json",
 			success : function(res, status, xhr) {
 				console.log(res);
@@ -75,7 +75,7 @@ $(function(){
 		$.ajax({
 			type : "POST",
 			url : "deleteBoard.do",
-			data : setParams(data, "POST"),
+			data : setParams(data, "OBJ"),
 			dataType : "json",
 			success : function(res, status, xhr) {
 				console.log(res);
@@ -93,9 +93,9 @@ $(function(){
 		});
 	});
 	
-	$("#aGetBoardList").click(function(){
-		var param = "?파람 뒤에 이을꺼";
+	$("#aGetBoardList").click(function(e){
+		e.preventDefault();
 		
-		window.location.href = "getBoardList.do";
+		history.back();
 	});
 });

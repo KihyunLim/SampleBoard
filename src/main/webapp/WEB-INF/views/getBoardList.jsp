@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="<c:url value="/resources/js/lib/jquery-3.3.1.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/common.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/getBoardList.js"/>"></script>
 <title>목록 조회</title>
 </head>
@@ -16,41 +17,23 @@
 	<h3>${userName } 환영합니다.<a href="logout.do">Log-out</a></h3>
 	
 	<!-- 검색 시작 -->
-	<%-- <form action="getBoardList.do" method="post">
+	<form action="getBoardList.do" method="post">
 		<table border="1" cellpadding="0" cellspacing="0" width="700">
 			<tr>
 				<td align="right">
-					<select name="searchCondition">
-						<c:if test="${searchInfo.searchCondition eq 'CONTENT' }">
+					<select id="selSearchCondition">
+						<option value="ALL" selected>전체</option>
 						<option value="TITLE">제목</option>
-						<option value="CONTENT" selected>내용</option>
-						</c:if>
-						<c:if test="${searchInfo.searchCondition ne 'CONTENT' }">
-						<option value="TITLE" selected>제목</option>
 						<option value="CONTENT">내용</option>
-						</c:if>
-					<!-- 굳이 동적으로 표현할 필요없어보여 주석 처리 -->
-					<c:forEach items="${conditionMap }" var="option">
-						<option value="${option.value }">${option.key }</option>
-					</c:forEach>
 					</select>
 					
-					<c:choose>
-						<c:when test="${searchInfo.searchKeyword ne '' }">
-						<input name="searchKeyword" id="asd" type="text" value="${searchInfo.searchKeyword }" />
-						</c:when>
-						
-						<c:otherwise>
-						<input name="searchKeyword" id="asd" type="text" />
-						</c:otherwise>
-					</c:choose>
+					<input type="text" id="inpSearchKeyword" />
 					
-					<!-- <input name="searchKeyword" type="text" /> -->
-					<input type="submit" id="btnSearch" value="<spring:message code="message.board.list.search.condition.btn"/>" />
+					<input type="button" id="btnSearch" value="검색" />
 				</td>
 			</tr>
 		</table>
-	</form> --%>
+	</form>
 	<!-- 검색 종료 -->
 	
 	<table id="tableBoardList" border="1" cellpadding="0" cellspacing="0" width="700">

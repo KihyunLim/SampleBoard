@@ -14,7 +14,7 @@ public interface BoardService {
 
 	BoardVO getBoard(BoardVO vo);
 
-	List<BoardVO> getBoardList(BoardVO vo);
+	List<BoardVO> getBoardList(BoardVO vo, String condition, String keyword);
 
 	int getBoardListCount(BoardVO vo);
 
