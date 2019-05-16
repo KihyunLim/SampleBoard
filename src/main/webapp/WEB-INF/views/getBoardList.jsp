@@ -49,14 +49,14 @@
 		
 		<tbody id="tbodyBoardList"></tbody>
 		
-		<tfoot>
+		<tfoot id="tfootPageWrap">
 			<tr>
 				<td colspan="5" align="center">
-					<a id="aPrev" href="getBoardList.do">이전</a>
+					<a id="aPrev" class="aPaging" href="">이전</a>
 					<span id="spanPageWrap">
 						<!-- <a href="getBoardList.do"></a> -->
 					</span>				
-					<a id="aNext" href="getBoardList.do">다음</a>
+					<a id="aNext" class="aPaging" href="">다음</a>
 				</td>
 			</tr>
 		</tfoot>

@@ -3,21 +3,35 @@
  */
 
 $(function(){
+	var extendParams = {};
 	
-	getBoardListJSON();
+	getBoardListJSON("");
 	
 	//나중에 init함수로 따로 만들어서 페이지 이동용 공통함수로 사용할 수 잇도록 분리ㄱ 상세조회 화면 바꾼거 처럼 ㄱㄱ
 	// url에 변수처리해서 페이지 같은 파람 이어 전달
-	function getBoardListJSON() {
+	function getBoardListJSON(requestUrl) {
 		$("#tbodyBoardList").empty();
+		$("#tfootPageWrap").hide();
+		$("#spanPageWrap").empty();
 		
-		var urlParams = getUrlParams(),
-			search = {
-				"searchCondition" : $("#selSearchCondition").val(),
-				"searchKeyword" : $("#inpSearchKeyword").val()
-			},
-			extendParams = $.extend(true, urlParams, search),
+		var param = "";
+		if(requestUrl == "") {
+			var urlParams = getUrlParams(),
+				search = {
+					"searchCondition" : $("#selSearchCondition").val(),
+					"searchKeyword" : $("#inpSearchKeyword").val()
+				};
+			extendParams = $.extend(true, urlParams, search);
+			
 			param = setParams(extendParams, "URL");
+		} else {
+			param = requestUrl;
+		}
+		
+		if(param == "") {
+			alert("게시글 조회에 실패했습니다.");
+			return;
+		}
 		
 		$.ajax({
 			type : "GET",
@@ -26,44 +40,68 @@ $(function(){
 			success : function(res, status, xhr) {
 				console.log(res);
 				
-				if(res.length < 1) {
-					$("#tbodyBoardList").append(
-							$("<tbody>").append(
-									$("<tr>").append(
-											$("<td>").prop("colspan", 5).append("등록된 게시물이 없습니다.")
-									)
-							)
-					)
+				if(res.boardList.length < 1) {
+					alert("등록된 게시물이 없습니다.");
 				} else {
 					res.boardList.forEach(function(item){
 						$("#tbodyBoardList").append(
 								$("<tr>").append(
 										$("<td>").append(item.seq),
 										$("<td>").prop("align", "left").append(
-												$("<a>").prop("href", "getBoard.do" + setParams($.extend(true, {"seq" : item.seq}, extendParams), "URL")).append(item.title)
+												$("<a>").prop("href", "getBoard.do" + setParams($.extend({}, extendParams, {"seq" : item.seq}), "URL")).append(item.title)
 										),
 										$("<td>").append(item.writer),
 										$("<td>").append(item.regDate),
 										$("<td>").append(item.cnt)
 								)
-						)
+						);
 					});
+					
+					for(var i = res.pageMaker.startPage ; i <= res.pageMaker.endPage ; i++) {
+						if(res.pageMaker.cri.page == i) {
+							$("#spanPageWrap").append(
+									$("<span>").append("[" + i + "]")
+							);
+						} else {
+							$("#spanPageWrap").append(
+									$("<a>").prop("href", setParams($.extend(true, extendParams, {"page" : i}), "URL")).addClass("aPaging").append("[" + i + "]")
+							);
+						}
+					}
+					
+					if(res.pageMaker.prev) {
+						$("#aPrev").show();
+						$("#aPrev").prop("href", setParams($.extend(true, extendParams, {"page" : res.pageMaker.startPage - 1}), "URL"));
+					} else {
+						$("#aPrev").hide();
+					}
+					
+					if(res.pageMaker.next) {
+						$("#aNext").show();
+						$("#aNext").prop("href", setParams($.extend(true, extendParams, {"page" : res.pageMaker.endPage + 1}), "URL"));
+					} else {
+						$("#aNext").hide();
+					}
+					
+					$("#tfootPageWrap").show();
 				}
 			},
 			error : function(jqXHR, textSatus, errorThrown) {
 				console.log(errorThrown);
 				
-				$("#tbodyBoardList").append(
-						$("<tr>").append(
-								$("<td>").prop("colspan", 5).append("게시글 조회에 실패했습니다.")
-						)
-				)
+				alert("게시글 조회에 실패했습니다.");
 			}
 		});
 	};
 	
 	$("#btnSearch").click(function(){
-		getBoardListJSON();
+		getBoardListJSON("");
+	});
+	
+	$("#tfootPageWrap").on("click", ".aPaging", function(e){
+		e.preventDefault();
+		
+		getBoardListJSON($(this).attr("href"));
 	});
 	
 	$("#btnWrite").click(function(e){
