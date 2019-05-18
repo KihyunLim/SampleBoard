@@ -7,8 +7,6 @@ $(function(){
 	
 	getBoardListJSON("");
 	
-	//나중에 init함수로 따로 만들어서 페이지 이동용 공통함수로 사용할 수 잇도록 분리ㄱ 상세조회 화면 바꾼거 처럼 ㄱㄱ
-	// url에 변수처리해서 페이지 같은 파람 이어 전달
 	function getBoardListJSON(requestUrl) {
 		$("#tbodyBoardList").empty();
 		$("#tfootPageWrap").hide();

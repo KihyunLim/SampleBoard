@@ -6,6 +6,18 @@ GRANT ALL PRIVILEGES ON sample_board.* TO 'userBoard'@'localhost';
 CREATE USER 'userBoard'@'%' IDENTIFIED BY '1234';
 GRANT ALL PRIVILEGES ON sample_board.* TO 'userBoard'@'%';
 
+CREATE TABLE REPLY(
+	SEQ			int auto_increment NOT NULL,
+    BOARDSEQ	int,
+    PARENTSEQ	int,
+    WRINTER		VARCHAR(50),
+    CONTENT		VARCHAR(100),
+    REGDATE		TIMESTAMP DEFAULT NOW(),
+    PRIMARY KEY (SEQ)
+) engine=InnoDB default character set = utf8;
+
+select * from reply;
+
 CREATE TABLE BOARD(
 	SEQ			int AUTO_INCREMENT NOT NULL,
     WRITER		VARCHAR(50),

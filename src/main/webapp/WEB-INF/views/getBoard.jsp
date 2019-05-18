@@ -14,11 +14,18 @@
 <title>글 상세</title>
 </head>
 <body>
+<a href="logout.do">Log-out</a>
 
 <center>
 	<h1>글 상세</h1>
-	<a href="logout.do">Log-out</a>
+	
 	<hr>
+	
+	<a id="aDeleteBoard" href="deleteBoard.do">글삭제</a>&nbsp;&nbsp;&nbsp;
+	<a id="aGetBoardList" href="getBoardList.do">글목록</a>
+	
+	<hr>
+	
 	<form>
 		<table border="1" cellpadding="0" cellspacing="0">
 			<tr>
@@ -52,9 +59,9 @@
 			</tr>
 		</table>
 	</form>
+	
 	<hr>
-	<a id="aDeleteBoard" href="deleteBoard.do">글삭제</a>&nbsp;&nbsp;&nbsp;
-	<a id="aGetBoardList" href="getBoardList.do">글목록</a>
+	
 </center>
 
 </body>
