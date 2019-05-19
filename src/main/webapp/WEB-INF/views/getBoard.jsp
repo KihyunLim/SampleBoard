@@ -61,8 +61,30 @@
 	</form>
 	
 	<hr>
+
+	<table border="1" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr>
+				<td>
+					<textarea id="replyConent" cols="40" rows="3"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<input type="button" id="btnInsertReply" value="댓글등록">
+				</td>
+			</tr>
+		</tbody>
+	</table>
 	
-</center>
+	<br>
+	
+	<table border="1" cellpadding="0" cellspacing="0">
+		<tbody id="tbodyReplyList">
+		</tbody>
+	</table>
+
+	</center>
 
 </body>
 </html>

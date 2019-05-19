@@ -101,4 +101,22 @@
 		</if>
 		;
 	</select>
+	
+	<insert id="insertBoardReply">
+		<![CDATA[
+			INSERT INTO
+				REPLY(
+					BOARDSEQ,
+					PARENTSEQ,
+					WRITER,
+					CONTENT
+				)
+			VALUES(
+				#{boardSeq},
+				#{parentSeq},
+				#{writer},
+				#{content}
+			);
+		]]>
+	</insert>
 </mapper>

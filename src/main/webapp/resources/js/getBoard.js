@@ -97,4 +97,37 @@ $(function(){
 		
 		history.back();
 	});
+	
+	$("#btnInsertReply").click(function(){
+		var data = {
+				"boardSeq" 	: seq,
+				"parentSeq"	: "P",
+				"writer" 		: getUserId,
+				"content" 		: $("#replyConent").val()
+		};
+		
+		requestInsertReply(data);
+	});
+	
+	function requestInsertReply(data) {
+		$.ajax({
+			type : "POST",
+			url : "insertBoardReply.do",
+			data : setParams(data, "OBJ"),
+			dataType : "json",
+			success : function(res, status, xhr) {
+				console.log(res);
+				
+				if(res.result) {
+					alert(res.message);
+				} else {
+					alert(res.message);
+				}
+			},
+			error : function(jqXHR, textSatus, errorThrown) {
+				console.log("error!!");
+				console.log(errorThrown);
+			}
+		});
+	}
 });
