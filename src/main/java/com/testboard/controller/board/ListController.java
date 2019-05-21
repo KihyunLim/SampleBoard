@@ -35,13 +35,19 @@ public class ListController {
 			) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
-		List<BoardVO> boardList = boardService.getBoardList(cri, condition, keyword);
-		result.put("boardList", boardList);
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(boardService.getBoardListCount(cri, condition, keyword));
-		result.put("pageMaker", pageMaker);
+		try {
+			List<BoardVO> boardList = boardService.getBoardList(cri, condition, keyword);
+			result.put("boardList", boardList);
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(boardService.getBoardListCount(cri, condition, keyword));
+			result.put("pageMaker", pageMaker);
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+			
+			result.put("message", "게시글 조회 실패");
+		}
 		
 		return result;
 	}

@@ -119,4 +119,15 @@
 			);
 		]]>
 	</insert>
+	
+	<select id="getBoardReplyList" resultType="boardReply">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				REPLY
+			WHERE
+				BOARDSEQ = #{boardSeq};
+		]]>
+	</select>
 </mapper>

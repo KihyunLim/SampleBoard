@@ -29,6 +29,8 @@ $(function(){
 				$("#content").val(res.content);
 				$("#regDate").text(res.regDate);
 				$("#cnt").text(res.cnt);
+				
+				getBoardReplyList();
 			},
 			error : function(jqXHR, textSatus, errorThrown) {
 				console.log(errorThrown);
@@ -126,6 +128,28 @@ $(function(){
 			},
 			error : function(jqXHR, textSatus, errorThrown) {
 				console.log("error!!");
+				console.log(errorThrown);
+			}
+		});
+	}
+	
+	function getBoardReplyList() {
+		var data = {
+				"boardSeq" : seq
+		};
+		
+		$.ajax({
+			type : "POST",
+			url : "getBoardReplyList.do",
+			data : setParams(data, "OBJ"),
+			dataType : "json",
+			success : function(res, status, xhr) {
+				console.log(res);
+				
+				
+			},
+			error : function(jqXHR, textSatus, errorThrown) {
+				console.log("error");
 				console.log(errorThrown);
 			}
 		});

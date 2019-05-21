@@ -6,6 +6,7 @@
 	<!-- Alias 설정 -->
 	<typeAliases>
 		<typeAlias alias="board" type="com.testboard.biz.board.BoardVO"></typeAlias>
+		<typeAlias alias="boardReply" type="com.testboard.biz.boardReply.BoardReplyVO"/>
 		<typeAlias alias="user" type="com.testboard.biz.user.UserVO"></typeAlias>
 	</typeAliases>
 	
