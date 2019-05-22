@@ -122,6 +122,9 @@ $(function(){
 				
 				if(res.result) {
 					alert(res.message);
+					
+					$("#tbodyReplyList").empty();
+					getBoardReplyList();
 				} else {
 					alert(res.message);
 				}
@@ -146,11 +149,30 @@ $(function(){
 			success : function(res, status, xhr) {
 				console.log(res);
 				
-				
+				res.boardReplyList.forEach(function(item){
+					$("#tbodyReplyList").append(
+							$("<tr>").append(
+									$("<td>").append(item.writer),
+									$("<td>").append(item.content),
+									$("<td>").append(item.regDate),
+									$("<td>").addClass("tdBtnWrap").append(
+											$("<input>").attr({type : "button", value : "수정", style : "display:none"}).addClass("btnUpdateReply btnReply"),
+											$("<input>").attr({type : "button", value : "삭제", style : "display:none"}).addClass("btnDeleteReply btnReply"),
+											$("<input>").attr({type : "button", value : "대댓"}).addClass("btnReRelpy")
+									)
+							)
+					)
+					
+					if(getUserId == item.writer) {
+						$(".tdBtnWrap:last").find(".btnReply").removeAttr("style");
+					}
+				});
 			},
 			error : function(jqXHR, textSatus, errorThrown) {
 				console.log("error");
 				console.log(errorThrown);
+				
+				alert("댓글 조회에 실패했습니다.");
 			}
 		});
 	}
