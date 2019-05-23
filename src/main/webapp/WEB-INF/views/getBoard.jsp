@@ -66,7 +66,7 @@
 		<tbody>
 			<tr>
 				<td>
-					<textarea id="replyConent" cols="40" rows="3"></textarea>
+					<textarea id="textareaReplyContent" cols="40" rows="3"></textarea>
 				</td>
 			</tr>
 			<tr>

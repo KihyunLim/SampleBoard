@@ -100,12 +100,30 @@ $(function(){
 		history.back();
 	});
 	
+	$("#tbodyReplyList").on("click", ".btnReRelpy", function(){
+		$(".trReReply").remove();
+		
+		var $trReReply = $("<tr>").addClass("trReReply").append(
+				$("<td>").append(getUserId),
+				$("<td>").append(
+						$("<span>").append("▶▶▶ "),
+						$("<textarea>").attr({cols : 40, rows : 1}).addClass("textareaReReplyContent")
+				),
+				$("<td>").append(""),
+				$("<td>").addClass("tdBtnWrap").append(
+						$("<input>").attr({type : "button", value : "등록"}).addClass("btnInsertReReply")
+				)
+		);
+		
+		$(this).parents("tr").after($trReReply);
+	});
+	
 	$("#btnInsertReply").click(function(){
 		var data = {
 				"boardSeq" 	: seq,
 				"parentSeq"	: "P",
 				"writer" 		: getUserId,
-				"content" 		: $("#replyConent").val()
+				"content" 		: $("#textareaReplyContent").val()
 		};
 		
 		requestInsertReply(data);
