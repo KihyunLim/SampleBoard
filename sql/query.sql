@@ -16,7 +16,11 @@ CREATE TABLE REPLY(
     PRIMARY KEY (SEQ)
 ) engine=InnoDB default character set = utf8;
 
+ALTER TABLE REPLY CHANGE PARENTSEQ PARENTSEQ VARCHAR(10);
+DESC REPLY;
+
 select * from reply;
+delete from reply where seq = 1;
 
 CREATE TABLE BOARD(
 	SEQ			int AUTO_INCREMENT NOT NULL,

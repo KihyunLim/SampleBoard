@@ -101,9 +101,9 @@ $(function(){
 	});
 	
 	$("#tbodyReplyList").on("click", ".btnReRelpy", function(){
-		$(".trReReply").remove();
+		$(".trEnterReReply").remove();
 		
-		var $trReReply = $("<tr>").addClass("trReReply").append(
+		var $trEnterReReply = $("<tr>").addClass("trEnterReReply trReReply").append(
 				$("<td>").append(getUserId),
 				$("<td>").append(
 						$("<span>").append("▶▶▶ "),
@@ -115,7 +115,7 @@ $(function(){
 				)
 		);
 		
-		$(this).parents("tr").after($trReReply);
+		$(this).parents("tr").after($trEnterReReply);
 	});
 	
 	$("#btnInsertReply").click(function(){
@@ -127,6 +127,32 @@ $(function(){
 		};
 		
 		requestInsertReply(data);
+	});
+	
+	$("#tbodyReplyList").on("click", ".btnUpdateReply", function(){
+		var $this = $(this),
+			replyContent = "",
+			$tdReplyContent = $this.parents("tr").find(".tdReplyContent");
+		
+		$this.attr("value", "수정 등록");
+		replyContent = $tdReplyContent.children(":last").text();
+		$tdReplyContent.children(":last").remove();
+		$tdReplyContent.append(
+				$("<textarea>").attr({cols : 40, rows : 1}).addClass("textareaUpdateContent").append(replyContent)
+		);
+		
+		$this.addClass("btnUpdateReplyRequest").removeClass("btnUpdateReply");
+	});
+	
+	$("#tbodyReplyList").on("click", ".btnUpdateReplyRequest", function(){
+		var $trThis = $(this).parents("tr"),
+			data = {
+				"boardSeq"	: $trThis.data("info").boardSeq,
+				"seq" 			: $trThis.data("info").seq,
+				"content"		: $trThis.find(".textareaUpdateContent").val()
+			};
+		
+		console.log(data);
 	});
 	
 	function requestInsertReply(data) {
@@ -152,7 +178,7 @@ $(function(){
 				console.log(errorThrown);
 			}
 		});
-	}
+	};
 	
 	function getBoardReplyList() {
 		var data = {
@@ -169,9 +195,11 @@ $(function(){
 				
 				res.boardReplyList.forEach(function(item){
 					$("#tbodyReplyList").append(
-							$("<tr>").append(
+							$("<tr>").data("info", {"boardSeq" : item.boardSeq, "seq" : item.seq}).append(
 									$("<td>").append(item.writer),
-									$("<td>").append(item.content),
+									$("<td>").addClass("tdReplyContent").append(
+											$("<span>").append(item.content)
+									),
 									$("<td>").append(item.regDate),
 									$("<td>").addClass("tdBtnWrap").append(
 											$("<input>").attr({type : "button", value : "수정", style : "display:none"}).addClass("btnUpdateReply btnReply"),
@@ -179,7 +207,7 @@ $(function(){
 											$("<input>").attr({type : "button", value : "대댓"}).addClass("btnReRelpy")
 									)
 							)
-					)
+					);
 					
 					if(getUserId == item.writer) {
 						$(".tdBtnWrap:last").find(".btnReply").removeAttr("style");
@@ -193,5 +221,5 @@ $(function(){
 				alert("댓글 조회에 실패했습니다.");
 			}
 		});
-	}
+	};
 });
