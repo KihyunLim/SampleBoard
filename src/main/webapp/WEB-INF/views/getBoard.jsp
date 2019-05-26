@@ -9,7 +9,7 @@
 <script type="text/javascript" src="<c:url value="/resources/js/common.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/getBoard.js"/>"></script>
 <script type="text/javascript">
-	var getUserId = "${userId}";
+	var loginId = "${userId}";
 </script>
 <title>글 상세</title>
 </head>

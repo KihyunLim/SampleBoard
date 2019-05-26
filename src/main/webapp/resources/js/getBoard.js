@@ -19,7 +19,7 @@ $(function(){
 				console.log(res);
 				seq = res.seq;
 				
-				if(getUserId != res.writer) {
+				if(loginId != res.writer) {
 					$(".myBoard").prop("readonly", true);
 					$("#btnUpdate").parents("tr").hide();
 					$("#aDeleteBoard").hide();
@@ -104,7 +104,7 @@ $(function(){
 		$(".trEnterReReply").remove();
 		
 		var $trEnterReReply = $("<tr>").addClass("trEnterReReply trReReply").append(
-				$("<td>").append(getUserId),
+				$("<td>").append(loginId),
 				$("<td>").append(
 						$("<span>").append("▶▶▶ "),
 						$("<textarea>").attr({cols : 40, rows : 1}).addClass("textareaReReplyContent")
@@ -122,9 +122,21 @@ $(function(){
 		var data = {
 				"boardSeq" 	: seq,
 				"parentSeq"	: "P",
-				"writer" 		: getUserId,
+				"writer" 		: loginId,
 				"content" 		: $("#textareaReplyContent").val()
 		};
+		
+		requestInsertReply(data);
+	});
+	
+	$("#tbodyReplyList").on("click", ".btnInsertReReply", function(){
+		var $trThis = $(this).parents("tr"),
+			data = {
+				"boardSeq"	: $trThis.prev().data("info").boardSeq,
+				"parentSeq"	: $trThis.prev().data("info").seq,
+				"writer"			: loginId,
+				"content"		: $trThis.find(".textareaReReplyContent").val()
+			};
 		
 		requestInsertReply(data);
 	});
@@ -193,6 +205,11 @@ $(function(){
 			success : function(res, status, xhr) {
 				console.log(res);
 				
+				/* 부모번호가 피면
+						푸시
+					아니면
+						숫자로 형변환한 부모번호를 splice로 해당 위치에 추가 
+				*/
 				res.boardReplyList.forEach(function(item){
 					$("#tbodyReplyList").append(
 							$("<tr>").data("info", {"boardSeq" : item.boardSeq, "seq" : item.seq}).append(
@@ -209,8 +226,12 @@ $(function(){
 							)
 					);
 					
-					if(getUserId == item.writer) {
+					if(loginId == item.writer) {
 						$(".tdBtnWrap:last").find(".btnReply").removeAttr("style");
+					}
+					
+					if(item.parentSeq != "P") {
+						$(".tdBtnWrap:last").find(".btnReRelpy").attr("style", "display:none");
 					}
 				});
 			},

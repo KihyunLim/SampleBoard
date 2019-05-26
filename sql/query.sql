@@ -9,7 +9,7 @@ GRANT ALL PRIVILEGES ON sample_board.* TO 'userBoard'@'%';
 CREATE TABLE REPLY(
 	SEQ			int auto_increment NOT NULL,
     BOARDSEQ	int,
-    PARENTSEQ	int,
+    PARENTSEQ	VARCHAR(10),
     WRINTER		VARCHAR(50),
     CONTENT		VARCHAR(100),
     REGDATE		TIMESTAMP DEFAULT NOW(),

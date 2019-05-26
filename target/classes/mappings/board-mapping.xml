@@ -127,7 +127,9 @@
 			FROM
 				REPLY
 			WHERE
-				BOARDSEQ = #{boardSeq};
+				BOARDSEQ = #{boardSeq}
+			ORDER BY
+				SEQ DESC;
 		]]>
 	</select>
 </mapper>
