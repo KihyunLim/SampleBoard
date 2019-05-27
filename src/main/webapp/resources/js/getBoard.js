@@ -203,13 +203,38 @@ $(function(){
 			data : setParams(data, "OBJ"),
 			dataType : "json",
 			success : function(res, status, xhr) {
-				console.log(res);
+				console.log(JSON.stringify(res));
 				
-				/* 부모번호가 피면
-						푸시
-					아니면
-						숫자로 형변환한 부모번호를 splice로 해당 위치에 추가 
+				/* 
+				 	결과 반복문
+						부모번호가 피면
+							피배열에 푸시
+						아니면
+							자식배열에 푸시
+					
+					자식배열 반복문
+						피배열의 해당 부모번호 뒤로 splice
+					
+					렌더
 				*/
+				var reply = [],
+					rereply = [];
+				
+				res.boardReplyList.forEach(function(item){
+					if(item.parentSeq == "P") {
+						reply.push(item);
+					} else {
+						rereply.push(item);
+					}
+				});
+				
+				rereply.forEach(function(item){
+					console.log(reply.indexOf(Number(item.parentSeq)));
+//					reply.splice(reply.indexOf(Number(item.parentSeq)), 0, item);
+				});
+				
+				console.log(JSON.stringify(reply));
+				/*
 				res.boardReplyList.forEach(function(item){
 					$("#tbodyReplyList").append(
 							$("<tr>").data("info", {"boardSeq" : item.boardSeq, "seq" : item.seq}).append(
@@ -233,7 +258,7 @@ $(function(){
 					if(item.parentSeq != "P") {
 						$(".tdBtnWrap:last").find(".btnReRelpy").attr("style", "display:none");
 					}
-				});
+				});*/
 			},
 			error : function(jqXHR, textSatus, errorThrown) {
 				console.log("error");
