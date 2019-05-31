@@ -127,6 +127,7 @@ $(function(){
 		};
 		
 		requestInsertReply(data);
+		$("#textareaReplyContent").val("");
 	});
 	
 	$("#tbodyReplyList").on("click", ".btnInsertReReply", function(){
@@ -203,23 +204,11 @@ $(function(){
 			data : setParams(data, "OBJ"),
 			dataType : "json",
 			success : function(res, status, xhr) {
-				console.log(JSON.stringify(res));
+				console.log(res);
 				
-				/* 
-				 	결과 반복문
-						부모번호가 피면
-							피배열에 푸시
-						아니면
-							자식배열에 푸시
-					
-					자식배열 반복문
-						피배열의 해당 부모번호 뒤로 splice
-					
-					렌더
-				*/
 				var reply = [],
 					rereply = [];
-				
+	
 				res.boardReplyList.forEach(function(item){
 					if(item.parentSeq == "P") {
 						reply.push(item);
@@ -227,15 +216,23 @@ $(function(){
 						rereply.push(item);
 					}
 				});
-				
+	
+				// 최신 대댓글이 맨위로 올라올 수 있드록 하기위함
+				rereply.sort(function(a, b){
+					return a.seq - b.seq;
+				});
+	
 				rereply.forEach(function(item){
-					console.log(reply.indexOf(Number(item.parentSeq)));
-//					reply.splice(reply.indexOf(Number(item.parentSeq)), 0, item);
+					var index = reply.findIndex(function(element){
+						return Number(item.parentSeq) == element.seq;
+					});
+					
+					reply.splice(index+1, 0, item);
 				});
 				
-				console.log(JSON.stringify(reply));
-				/*
-				res.boardReplyList.forEach(function(item){
+				console.log(reply);
+				
+				reply.forEach(function(item){
 					$("#tbodyReplyList").append(
 							$("<tr>").data("info", {"boardSeq" : item.boardSeq, "seq" : item.seq}).append(
 									$("<td>").append(item.writer),
@@ -256,9 +253,10 @@ $(function(){
 					}
 					
 					if(item.parentSeq != "P") {
+						$(".tdBtnWrap:last").parents("tr").find(".tdReplyContent").prepend($("<span>").append("▶▶▶ "));
 						$(".tdBtnWrap:last").find(".btnReRelpy").attr("style", "display:none");
 					}
-				});*/
+				});
 			},
 			error : function(jqXHR, textSatus, errorThrown) {
 				console.log("error");
