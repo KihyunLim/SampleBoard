@@ -100,6 +100,18 @@ $(function(){
 		history.back();
 	});
 	
+	$("#btnInsertReply").click(function(){
+		var data = {
+				"boardSeq" 	: seq,
+				"parentSeq"	: "P",
+				"writer" 		: loginId,
+				"content" 		: $("#textareaReplyContent").val()
+		};
+		
+		requestInsertReply(data);
+		$("#textareaReplyContent").val("");
+	});
+	
 	$("#tbodyReplyList").on("click", ".btnReRelpy", function(){
 		$(".trEnterReReply").remove();
 		
@@ -116,18 +128,7 @@ $(function(){
 		);
 		
 		$(this).parents("tr").after($trEnterReReply);
-	});
-	
-	$("#btnInsertReply").click(function(){
-		var data = {
-				"boardSeq" 	: seq,
-				"parentSeq"	: "P",
-				"writer" 		: loginId,
-				"content" 		: $("#textareaReplyContent").val()
-		};
-		
-		requestInsertReply(data);
-		$("#textareaReplyContent").val("");
+		$(".textareaReReplyContent").focus();
 	});
 	
 	$("#tbodyReplyList").on("click", ".btnInsertReReply", function(){
@@ -160,38 +161,21 @@ $(function(){
 	$("#tbodyReplyList").on("click", ".btnUpdateReplyRequest", function(){
 		var $trThis = $(this).parents("tr"),
 			data = {
-				"boardSeq"	: $trThis.data("info").boardSeq,
 				"seq" 			: $trThis.data("info").seq,
 				"content"		: $trThis.find(".textareaUpdateContent").val()
 			};
 		
-		console.log(data);
+		requestUpdateReply(data);
 	});
 	
-	function requestInsertReply(data) {
-		$.ajax({
-			type : "POST",
-			url : "insertBoardReply.do",
-			data : setParams(data, "OBJ"),
-			dataType : "json",
-			success : function(res, status, xhr) {
-				console.log(res);
-				
-				if(res.result) {
-					alert(res.message);
-					
-					$("#tbodyReplyList").empty();
-					getBoardReplyList();
-				} else {
-					alert(res.message);
-				}
-			},
-			error : function(jqXHR, textSatus, errorThrown) {
-				console.log("error!!");
-				console.log(errorThrown);
-			}
-		});
-	};
+	$("#tbodyReplyList").on("click", ".btnDeleteReply", function(){
+		var $trThis = $(this).parents("tr"),
+			data = {
+				"seq" : $trThis.data("info").seq
+			};
+		
+		requestDeleteReply(data);
+	});
 	
 	function getBoardReplyList() {
 		var data = {
@@ -263,6 +247,81 @@ $(function(){
 				console.log(errorThrown);
 				
 				alert("댓글 조회에 실패했습니다.");
+			}
+		});
+	};
+	
+	function requestInsertReply(data) {
+		$.ajax({
+			type : "POST",
+			url : "insertBoardReply.do",
+			data : setParams(data, "OBJ"),
+			dataType : "json",
+			success : function(res, status, xhr) {
+				console.log(res);
+				
+				if(res.result) {
+					alert(res.message);
+					
+					$("#tbodyReplyList").empty();
+					getBoardReplyList();
+				} else {
+					alert(res.message);
+				}
+			},
+			error : function(jqXHR, textSatus, errorThrown) {
+				console.log("error!!");
+				console.log(errorThrown);
+			}
+		});
+	};
+	
+	function requestUpdateReply(data) {
+		$.ajax({
+			type : "POST",
+			url : "updateBoardReply.do",
+			data : setParams(data, "OBJ"),
+			dataType : "json",
+			success : function(res, status, xhr) {
+				console.log(res);
+				
+				if(res.result) {
+					alert(res.message);
+					
+					$("#tbodyReplyList").empty();
+					getBoardReplyList();
+				} else {
+					alert(res.message);
+				}
+			},
+			error : function(jqXHR, textSatus, errorThrown) {
+				console.log("error!!");
+				console.log(errorThrown);
+			}
+		});
+	};
+	
+	function requestDeleteReply(data) {
+		$.ajax({
+			type : "POST",
+			url : "deleteBoardReply.do",
+			data : setParams(data, "OBJ"),
+			dataType : "json",
+			success : function(res, status, xhr) {
+				console.log(res);
+				
+				if(res.result) {
+					alert(res.message);
+					
+					$("#tbodyReplyList").empty();
+					getBoardReplyList();
+				} else {
+					alert(res.message);
+				}
+			},
+			error : function(jqXHR, textSatus, errorThrown) {
+				console.log("error!!");
+				console.log(errorThrown);
 			}
 		});
 	};

@@ -20,6 +20,7 @@ ALTER TABLE REPLY CHANGE PARENTSEQ PARENTSEQ VARCHAR(10);
 DESC REPLY;
 
 select * from reply;
+select * from reply where seq=8 or parentseq=convert(8, char(10));
 delete from reply where seq = 1;
 
 CREATE TABLE BOARD(

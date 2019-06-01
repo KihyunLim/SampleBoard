@@ -102,6 +102,20 @@
 		;
 	</select>
 	
+	<select id="getBoardReplyList" resultType="boardReply">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				REPLY
+			WHERE
+				BOARDSEQ = #{boardSeq}
+			ORDER BY
+				PARENTSEQ DESC,
+				SEQ DESC;
+		]]>
+	</select>
+	
 	<insert id="insertBoardReply">
 		<![CDATA[
 			INSERT INTO
@@ -120,17 +134,25 @@
 		]]>
 	</insert>
 	
-	<select id="getBoardReplyList" resultType="boardReply">
+	<update id="updateBoardReply">
 		<![CDATA[
-			SELECT
-				*
-			FROM
+			UPDATE
+				REPLY
+			SET
+				CONTENT = #{content}
+			WHERE
+				SEQ = #{seq};
+		]]>
+	</update>
+	
+	<delete id="deleteBoardReply">
+		<![CDATA[
+			DELETE FROM
 				REPLY
 			WHERE
-				BOARDSEQ = #{boardSeq}
-			ORDER BY
-				PARENTSEQ DESC,
-				SEQ DESC;
+				SEQ = #{seq}
+				OR
+				PARENTSEQ = CONVERT(#{seq}, CHAR(10));
 		]]>
-	</select>
+	</delete>
 </mapper>
