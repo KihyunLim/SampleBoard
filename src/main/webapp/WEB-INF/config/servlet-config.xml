@@ -18,4 +18,17 @@
 		<property name="prefix" value="/WEB-INF/views/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.do"/>
+			<mvc:exclude-mapping path="/login.do"/>
+			<mvc:exclude-mapping path="/getBoardList.do"/>
+			<mvc:exclude-mapping path="/getBoardListJSON.do"/>
+			<mvc:exclude-mapping path="/getBoard.do"/>
+			<mvc:exclude-mapping path="/getBoardJSON.do"/>
+			<mvc:exclude-mapping path="/getBoardReplyList.do"/>
+			<bean class="com.testboard.biz.common.interceptor.AuthenticationInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
