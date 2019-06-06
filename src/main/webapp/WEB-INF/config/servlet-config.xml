@@ -31,4 +31,16 @@
 			<bean class="com.testboard.biz.common.interceptor.AuthenticationInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
+	
+	<!-- 강제로 보내면 되긴하는데, 다 ajax로 받고 예외처리를 해놔서 쓸데가 없네;; -->
+	<!-- <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="not_defined">
+					asdfError
+				</prop>
+			</props>
+		</property>
+		<property name="defaultErrorView" value="error"></property>
+	</bean> -->
 </beans>
