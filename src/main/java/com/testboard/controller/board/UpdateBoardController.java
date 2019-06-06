@@ -43,7 +43,8 @@ public class UpdateBoardController {
 			result.put("result", true);
 			result.put("message", "게시글 수정에 성공했습니다.");
 		} catch(Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("error message : " + e.getMessage());
+			LOGGER.error("error trace : ", e);
 			
 			result.put("result", false);
 			result.put("message", "게시글 수정에 실패했습니다.");

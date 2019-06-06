@@ -47,7 +47,8 @@ public class ListController {
 			pageMaker.setTotalCount(boardService.getBoardListCount(cri, condition, keyword));
 			result.put("pageMaker", pageMaker);
 		} catch(Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("error message : " + e.getMessage());
+			LOGGER.error("error trace : ", e);
 			
 			result.put("message", "게시글 조회 실패");
 		}

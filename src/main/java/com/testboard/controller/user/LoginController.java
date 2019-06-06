@@ -63,7 +63,8 @@ public class LoginController {
 				result.put("message", "비밀번호가 일지하지 않습니다.");
 			}
 		} catch(NullPointerException e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("error message : " + e.getMessage());
+			LOGGER.error("error trace : ", e);
 			
 			result.put("result", false);
 			result.put("message", "등록된 아이디가 없습니다.");

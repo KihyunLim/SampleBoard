@@ -6,10 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
+	private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationInterceptor.class);
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -17,11 +20,25 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 		Object obj = session.getAttribute("userId");
 		
 		if(obj == null) {
-//			response.setContentType("text/html; charset=UTF-8");
-//			PrintWriter out = response.getWriter();
-//			out.println("<script>alert('로그인 후 이용해주시기 바랍니다.');</script>");
-//			out.flush();
-			response.sendRedirect("login.do");
+			LOGGER.info(">>>>> 로그인 안하고 시도하는 중!!");
+			
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("var confirmMoveLogin = confirm('로그인 후 이용가능합니다. \n로그인 화면으로 이동하시겠습니까?');");
+				out.println("if(confirmMoveLogin) {");
+				out.println("	location.href = '/SampleBoard/login.do';");
+				out.println("} else {");
+				out.println("	history.go(-1);");
+				out.println("}");
+				out.println("</script>");
+				out.flush();
+			} catch(Exception e) {
+				LOGGER.error("error message : " + e.getMessage());
+				LOGGER.error("error trace : ", e);
+			}
+
 			return false;
 		}
 		

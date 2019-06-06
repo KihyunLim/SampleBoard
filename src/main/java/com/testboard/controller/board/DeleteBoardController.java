@@ -31,7 +31,8 @@ public class DeleteBoardController {
 			result.put("result", true);
 			result.put("message", "게시글이 삭제 되었습니다.");
 		} catch(Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("error message : " + e.getMessage());
+			LOGGER.error("error trace : ", e);
 			
 			result.put("result",  false);
 			result.put("message", "게시글 삭제에 실패했습니다.");

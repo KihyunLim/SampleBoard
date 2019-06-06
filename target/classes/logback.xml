@@ -54,25 +54,29 @@
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
-	<logger name="org.springframework.core">
-		<level value="info" />
+	<logger name="org.springframework.core" level="info">
+		<appender-ref ref="consoleAppender" />
+		<appender-ref ref="fileAppender" />
 	</logger>
 	
-	<logger name="org.springframework.beans">
-		<level value="info" />
+	<logger name="org.springframework.beans" level="info">
+		<appender-ref ref="consoleAppender" />
+		<appender-ref ref="fileAppender" />
 	</logger>
 	
-	<logger name="org.springframework.context">
-		<level value="info" />
+	<logger name="org.springframework.context" level="info">
+		<appender-ref ref="consoleAppender" />
+		<appender-ref ref="fileAppender" />
 	</logger>
 
-	<logger name="org.springframework.web">
-		<level value="info" />
+	<logger name="org.springframework.web" level="info">
+		<appender-ref ref="consoleAppender" />
+		<appender-ref ref="fileAppender" />
 	</logger>
 	
 	<!-- Root Logger -->
 	<root level="warn">
-		<!-- <appender-ref ref="consoleAppender" /> -->
+		<appender-ref ref="consoleAppender" />
 		<appender-ref ref="fileAppender" />
 	</root>
 </configuration>

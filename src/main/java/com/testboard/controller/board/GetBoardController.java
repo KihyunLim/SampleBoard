@@ -32,7 +32,8 @@ public class GetBoardController {
 			boardService.updateBoardCnt(vo);
 			result.setCnt(result.getCnt() + 1);
 		} catch(Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("error message : " + e.getMessage());
+			LOGGER.error("error trace : ", e);
 		}
 		
 		return result;

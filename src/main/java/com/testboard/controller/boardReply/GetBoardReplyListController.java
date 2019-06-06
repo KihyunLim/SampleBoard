@@ -30,7 +30,8 @@ public class GetBoardReplyListController {
 			List<BoardReplyVO> boardReplyList = boardReplyService.getBoardReplyList(vo);
 			result.put("boardReplyList", boardReplyList);
 		} catch(Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("error message : " + e.getMessage());
+			LOGGER.error("error trace : ", e);
 			
 			result.put("message", "댓글 조회 실패");
 		}
