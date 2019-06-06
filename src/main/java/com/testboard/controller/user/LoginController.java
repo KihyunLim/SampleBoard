@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,7 @@ import com.testboard.biz.user.UserVO;
 
 @Controller
 public class LoginController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired
 	private UserService userService;
@@ -60,8 +63,7 @@ public class LoginController {
 				result.put("message", "비밀번호가 일지하지 않습니다.");
 			}
 		} catch(NullPointerException e) {
-			System.out.println(e.getMessage());
-//			e.printStackTrace();							// 이건 로깅파일?? 요걸로 맞춰주면 좋을듯한뎁
+			LOGGER.error(e.getMessage());
 			
 			result.put("result", false);
 			result.put("message", "등록된 아이디가 없습니다.");

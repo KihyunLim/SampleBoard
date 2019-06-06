@@ -3,6 +3,8 @@ package com.testboard.controller.boardReply;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import com.testboard.biz.boardReply.BoardReplyVO;
 
 @Controller
 public class InsertBoardReplyController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(InsertBoardReplyController.class);
 
 	@Autowired
 	private BoardReplyService boardReplyService;
@@ -35,7 +38,7 @@ public class InsertBoardReplyController {
 			result.put("result",  true);
 			result.put("message",  "댓글이 등록되었습니다.");
 		} catch(Exception e) {
-			System.out.println(e.getMessage());
+			LOGGER.error(e.getMessage());
 			
 			result.put("result", false);
 			result.put("message", "댓글 등록에 실패했습니다.");

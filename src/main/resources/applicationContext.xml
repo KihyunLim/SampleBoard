@@ -28,7 +28,7 @@
 		<property name="logFormatter">
 			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
 				<property name="loggingType" value="MULTI_LINE"></property>
-				<property name="sqlPrefix" value="SQL"></property>
+				<property name="sqlPrefix" value="SQL : "></property>
 			</bean>
 		</property>
 	</bean>

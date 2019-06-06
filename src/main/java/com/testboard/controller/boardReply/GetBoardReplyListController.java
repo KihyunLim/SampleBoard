@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import com.testboard.biz.boardReply.BoardReplyVO;
 
 @Controller
 public class GetBoardReplyListController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(GetBoardReplyListController.class);
 
 	@Autowired
 	private BoardReplyService boardReplyService;
@@ -27,7 +30,7 @@ public class GetBoardReplyListController {
 			List<BoardReplyVO> boardReplyList = boardReplyService.getBoardReplyList(vo);
 			result.put("boardReplyList", boardReplyList);
 		} catch(Exception e) {
-			System.out.println(e.getMessage());
+			LOGGER.error(e.getMessage());
 			
 			result.put("message", "댓글 조회 실패");
 		}

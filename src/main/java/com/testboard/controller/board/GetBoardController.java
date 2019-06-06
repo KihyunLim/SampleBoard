@@ -1,5 +1,7 @@
 package com.testboard.controller.board;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import com.testboard.biz.board.BoardVO;
 
 @Controller
 public class GetBoardController {
+	private static final Logger LOGGER = LoggerFactory.getLogger(GetBoardController.class);
 
 	@Autowired
 	private BoardService boardService;
@@ -29,7 +32,7 @@ public class GetBoardController {
 			boardService.updateBoardCnt(vo);
 			result.setCnt(result.getCnt() + 1);
 		} catch(Exception e) {
-			System.out.println(e.getMessage());
+			LOGGER.error(e.getMessage());
 		}
 		
 		return result;

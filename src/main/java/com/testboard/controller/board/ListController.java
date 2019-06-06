@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +20,8 @@ import com.testboard.biz.common.paging.PageMaker;
 
 @Controller
 public class ListController {
-	private static final Log LOG = LogFactory.getLog(ListController.class);
-
+	private static final Logger LOGGER = LoggerFactory.getLogger(ListController.class);
+	
 	@Autowired
 	private BoardService boardService;
 	
@@ -40,11 +38,10 @@ public class ListController {
 			) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
-		LOG.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 테스트요오 debug : " + condition);
-		LOG.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 테스트요오 info : " + condition);
-		LOG.warn(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 테스트요오 warn : " + condition);
-		LOG.error(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 테스트요오 error : " + condition);
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 테스트요오 println : " + condition);
+		LOGGER.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 테스트요오 debug : " + condition);
+		LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 테스트요오 info : " + condition);
+		LOGGER.warn(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 테스트요오 warn : " + condition);
+		LOGGER.error(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 테스트요오 error : " + condition);
 		
 		try {
 			List<BoardVO> boardList = boardService.getBoardList(cri, condition, keyword);
@@ -55,7 +52,7 @@ public class ListController {
 			pageMaker.setTotalCount(boardService.getBoardListCount(cri, condition, keyword));
 			result.put("pageMaker", pageMaker);
 		} catch(Exception e) {
-			System.out.println(e.getMessage());
+			LOGGER.error(e.getMessage());
 			
 			result.put("message", "게시글 조회 실패");
 		}
