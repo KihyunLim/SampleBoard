@@ -104,6 +104,7 @@
 			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- multiple SLF4J bindings 에러나와서 주석 처리 (logback랑 겹치나봄) -->
 		<!-- <dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>

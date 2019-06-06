@@ -38,11 +38,6 @@ public class ListController {
 			) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
-		LOGGER.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 테스트요오 debug : " + condition);
-		LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 테스트요오 info : " + condition);
-		LOGGER.warn(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 테스트요오 warn : " + condition);
-		LOGGER.error(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 테스트요오 error : " + condition);
-		
 		try {
 			List<BoardVO> boardList = boardService.getBoardList(cri, condition, keyword);
 			result.put("boardList", boardList);
