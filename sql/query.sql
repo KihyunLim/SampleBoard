@@ -6,6 +6,15 @@ GRANT ALL PRIVILEGES ON sample_board.* TO 'userBoard'@'localhost';
 CREATE USER 'userBoard'@'%' IDENTIFIED BY '1234';
 GRANT ALL PRIVILEGES ON sample_board.* TO 'userBoard'@'%';
 
+CREATE TABLE ATTACH(
+	FULLNAME	VARCHAR(150) NOT NULL,
+    BOARDSEQ	INT,
+    REGDATE		TIMESTAMP DEFAULT NOW(),
+    PRIMARY KEY (FULLNAME)
+) engine=InnoDB default character set = utf8;
+
+select * from attach;
+
 CREATE TABLE REPLY(
 	SEQ			int auto_increment NOT NULL,
     BOARDSEQ	int,

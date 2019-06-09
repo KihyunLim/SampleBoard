@@ -41,6 +41,12 @@
 				</td>
 			</tr>
 			<tr>
+				<td bgcolor="orange" width="70">업로드</td>
+				<td align="left">
+					<div id="a" style="border:2px gray dotted; background-color:#ffa50026; height:50px;"></div>
+				</td>
+			</tr>
+			<tr>
 				<td colspan="2" align="center">
 					<input type="button" value="새글 등록" id="btnRegist" />
 				</td>

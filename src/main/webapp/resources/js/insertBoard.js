@@ -3,6 +3,19 @@
  */
 
 $(function(){
+	$("#a").on("dragenter dragover", function(e){
+		e.preventDefault();
+	});
+	
+	$("#a").on("drop", function(e){
+		e.preventDefault();
+		var files = e.originalEvent.dataTransfer.files;
+		var file = files[0];
+		var formData = new FormData();
+		formData.append("file", file);
+		console.log(formData.get("file"));
+	});
+	
 	$("#btnRegist").click(function(e){
 		var data = $("form").serialize();
 		
@@ -16,7 +29,7 @@ $(function(){
 				console.log(res);
 				
 				if(res.result) {
-					window.location.href = "getBoardList.do";
+					history.back();
 				} else {
 					alert(res.message);
 				}
@@ -26,5 +39,5 @@ $(function(){
 				console.log(errorThrown);
 			}
 		})
-	})
+	});
 });
