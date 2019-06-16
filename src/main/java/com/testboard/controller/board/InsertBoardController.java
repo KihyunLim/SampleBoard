@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.testboard.biz.board.BoardService;
 import com.testboard.biz.board.BoardVO;
+import com.testboard.biz.boardUpload.BoardUploadService;
 
 @Controller
 public class InsertBoardController {
@@ -22,12 +24,16 @@ public class InsertBoardController {
 	@Autowired
 	private BoardService boardService;
 	
+	@Autowired
+	private BoardUploadService boardUploadService;
+	
 	@RequestMapping(value="/insertBoard.do", method=RequestMethod.GET)
 	public String insertBoardView(BoardVO vo) {
 		return "insertBoard";
 	}
 	
 	@RequestMapping(value="/insertBoard.do", method=RequestMethod.POST)
+//	@Transactional		//어차피 처음에 실패할테니 테스트 겸사로 막아놓음. 성공해버리면 머..ㅎ
 	@ResponseBody
 	public Map<String, Object> insertBoard(BoardVO vo) {
 		
@@ -47,6 +53,13 @@ public class InsertBoardController {
 		
 		try {
 			boardService.insertBoard(vo);
+			String[] files = vo.getFiles();
+			
+			if(files != null) {
+				for(String fileName : files) {
+					boardUploadService.addFile(fileName);
+				}
+			}
 			
 			result.put("result", true);
 			result.put("message", "게시글 등록에 성공했습니다.");

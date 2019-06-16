@@ -37,7 +37,7 @@
 			<tr>
 				<td bgcolor="orange" width="70">업로드</td>
 				<td align="left">
-					<input type="file" name="uploadFile"></input>
+					<input type="file" name="uploadFile" id="inpUploadFile"></input>
 				</td>
 			</tr>
 			<tr>

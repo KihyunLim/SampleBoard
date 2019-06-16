@@ -1,6 +1,7 @@
 package com.testboard.biz.board;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 public class BoardVO {
@@ -11,6 +12,8 @@ public class BoardVO {
 	private String content;
 	private Date regDate;
 	private int cnt;
+	private String[] files;
+	private int fileCnt;
 	
 	public int getSeq() {
 		return seq;
@@ -49,10 +52,22 @@ public class BoardVO {
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
+	public int getFileCnt() {
+		return fileCnt;
+	}
+	public void setFileCnt(int fileCnt) {
+		this.fileCnt = fileCnt;
+	}
 	
 	@Override
 	public String toString() {
 		return "BoardVO [seq=" + seq + ", writer=" + writer + ", title=" + title + ", content=" + content + ", regDate="
-				+ regDate + ", cnt=" + cnt + "]";
+				+ regDate + ", cnt=" + cnt + ", files=" + Arrays.toString(files) + ", fileCnt=" + fileCnt + "]";
 	}
 }
