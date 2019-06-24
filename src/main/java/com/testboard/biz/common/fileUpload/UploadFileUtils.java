@@ -91,7 +91,7 @@ public class UploadFileUtils {
 	}
 	
 	private static void makeDateDir(String uploadPath, String... paths) {
-		if(new File(uploadPath + paths[paths.length -1 ]).exists()) {
+		if(new File(uploadPath + paths[paths.length - 1]).exists()) {
 			return;
 		}
 		

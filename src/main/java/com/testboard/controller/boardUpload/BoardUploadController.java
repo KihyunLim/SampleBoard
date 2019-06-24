@@ -34,6 +34,8 @@ public class BoardUploadController {
 		
 		try {
 			String savedFilePath = UploadFileUtils.uploadFile(file, request);
+			LOGGER.debug(">>>>>>>>>> uploadFile > savedFilePath : " + savedFilePath);
+			
 			entity = new ResponseEntity<>(savedFilePath, HttpStatus.CREATED);
 		} catch (Exception e) {
 			LOGGER.error("error message : " + e.getMessage());

@@ -41,15 +41,18 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.testboard" level="debug" additivity="false">
+		<appender-ref ref="consoleAppender" />
 		<appender-ref ref="fileAppender" />
 	</logger>
 	
 	<!-- Query Loggers -->
 	<logger name="jdbc.sqlonly" level="info" additivity="false">
+		<appender-ref ref="consoleAppender" />
 		<appender-ref ref="fileAppender"></appender-ref>
 	</logger>
 	
 	<logger name="jdbc.resultsettable" level="info" additivity="false">
+		<appender-ref ref="consoleAppender" />
 		<appender-ref ref="fileAppender"></appender-ref>
 	</logger>
 	

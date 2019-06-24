@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="<c:url value="/resources/js/lib/jquery-3.3.1.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/commonUploadFile.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/insertBoard.js"/>"></script>
 <title>글 등록</title>
 </head>
@@ -35,17 +36,22 @@
 				</td>
 			</tr>
 			<tr>
-				<td bgcolor="orange" width="70">업로드</td>
+				<td rowspan="2" bgcolor="orange" width="70">업로드</td>
 				<td align="left">
 					<input type="file" name="uploadFile" id="inpUploadFile"></input>
 				</td>
 			</tr>
 			<tr>
+				<td align="left">
+					<div id="divFileWrap"></div>
+				</td>
+			</tr>
+			<!-- <tr>
 				<td bgcolor="orange" width="70">업로드</td>
 				<td align="left">
 					<div id="a" style="border:2px gray dotted; background-color:#ffa50026; height:50px;"></div>
 				</td>
-			</tr>
+			</tr> -->
 			<tr>
 				<td colspan="2" align="center">
 					<input type="button" value="새글 등록" id="btnRegist" />

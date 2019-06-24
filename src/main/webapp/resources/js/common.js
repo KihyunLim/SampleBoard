@@ -2,6 +2,10 @@
  * 
  */
 
+/* 
+ * ajax data 및 url 셋팅 관련 유틸 -----------
+ */
+
 // url에서 parameter를 객체로 변환
 function getUrlParams() {
     var params = {};
@@ -38,4 +42,8 @@ function setParams(data, type) {
 		console.log("setParams : type is undefined!!");
 		return "";
 	}
-}
+};
+
+/* 
+ * ----------- ajax data 및 url 셋팅 관련 유틸
+ */
