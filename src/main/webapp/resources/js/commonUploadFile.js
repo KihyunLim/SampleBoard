@@ -28,7 +28,15 @@ $(function(){
 		formData.append("file", file);
 		console.log(formData.get("file"));
 		
-		uploadFile(formData);
+		if(formData.get("file") != undefined) {
+			uploadFile(formData);
+		}
+	});
+	
+	$("#divFileWrap").on("click", ".aDeleteFile", function(e){
+		e.preventDefault();
+		
+		deleteFile("fileDelete.do", $(this));
 	});
 	
 	function uploadFile(formData) {
@@ -42,7 +50,9 @@ $(function(){
 			success : function(data) {
 				console.log(data);
 				
-				printFiles(data);
+				if(data != "" && data != null && data != undefined) {
+					printFiles(data);
+				}
 			}
 		});
 	};
@@ -62,6 +72,23 @@ $(function(){
 						)
 				)
 		);
+	};
+	
+	function deleteFile(url, that) {
+		$.ajax({
+			url : url,
+			type : "POST",
+			data : {fileName : that.attr("href")},
+			dataType : "text",
+			success : function(result) {
+				console.log(result);
+				
+				if(result === "DELETED") {
+					alert("삭제되었습니다.");
+					that.parents(".divItem").remove();
+				}
+			}
+		});
 	};
 	
 	function getFileInfo(fullName) {

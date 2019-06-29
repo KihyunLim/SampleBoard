@@ -37,6 +37,10 @@ public class BoardUploadController {
 			LOGGER.debug(">>>>>>>>>> uploadFile > savedFilePath : " + savedFilePath);
 			
 			entity = new ResponseEntity<>(savedFilePath, HttpStatus.CREATED);
+		}catch (NullPointerException e) {
+			LOGGER.error("error message : " + e.getMessage() + " 첨부파일 취소 눌럿을때만 이거 나오겠지??");
+			
+			entity = null;
 		} catch (Exception e) {
 			LOGGER.error("error message : " + e.getMessage());
 			LOGGER.error("error trace : ", e);

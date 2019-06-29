@@ -15,6 +15,8 @@ CREATE TABLE ATTACH(
 
 select * from attach;
 
+SELECT LAST_INSERT_ID();
+
 CREATE TABLE REPLY(
 	SEQ			int auto_increment NOT NULL,
     BOARDSEQ	int,
@@ -80,8 +82,8 @@ insert into board (
 )
 values(
     'TEST',
-    'TITLE22',
-    'CONTENT22'
+    'TITLE1818',
+    'CONTENT1818'
 );
 
 drop table board;

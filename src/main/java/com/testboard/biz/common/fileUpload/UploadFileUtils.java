@@ -47,8 +47,13 @@ public class UploadFileUtils {
 		MediaType mediaType = MediaUtils.getMediaType(fileName);
 		if(mediaType != null) {
 			String originalImg = fileName.substring(0, 12) + fileName.substring(14);
+			
 			new File(rootPath + originalImg.replace('/', File.separatorChar)).delete();
+			LOGGER.debug(">>>>>>>>>> imgFile : " + rootPath + originalImg.replace('/', File.separatorChar));
 		}
+		
+		new File(rootPath + fileName.replace('/', File.separatorChar)).delete();
+		LOGGER.debug(">>>>>>>>>> file or thumImg : " + rootPath + fileName.replace('/', File.separatorChar));
 	}
 	
 	public static HttpHeaders getHttpHeaders(String fileName) throws Exception {
