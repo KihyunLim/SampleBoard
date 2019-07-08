@@ -70,7 +70,7 @@ public class BoardUploadController {
 		return entity;
 	}
 	
-	@RequestMapping(value="/fileDelete", method=RequestMethod.POST)
+	@RequestMapping(value="/fileDelete.do", method=RequestMethod.POST)
 	public ResponseEntity<String> deleteFile(String fileName, HttpServletRequest request) {
 		ResponseEntity<String> entity = null;
 		

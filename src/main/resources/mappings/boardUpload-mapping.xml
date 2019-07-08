@@ -5,7 +5,7 @@
 <mapper namespace="BoardUploadDAO">
 
 	<insert id="addFile">
-		INSERT INTO attach (
+		INSERT INTO ATTACH (
 			FULLNAME,
 			BOARDSEQ
 		) VALUES (
@@ -13,5 +13,23 @@
 			LAST_INSERT_ID()
 		);
 	</insert>
+
+	<select id="getBoardFiles" resultType="string">
+		SELECT
+			FULLNAME
+		FROM
+			ATTACH
+		WHERE
+			BOARDSEQ = #{boardSeq}
+		ORDER BY 
+			REGDATE;
+	</select>
+	
+	<delete id="deleteFiles">
+		DELETE FROM
+			ATTACH
+		WHERE
+			BOARDSEQ = #{boardSeq};
+	</delete>
 
 </mapper>
