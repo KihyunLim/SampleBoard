@@ -24,4 +24,8 @@ public class BoardUploadServiceImpl implements BoardUploadService {
 	public void deleteFiles(Integer boardSeq) throws Exception {
 		boardUploadDAO.deleteFiles(boardSeq);
 	}
+	
+	public int getBoardFileCnt(Integer boardSeq) throws Exception {
+		return boardUploadDAO.getBoardFileCnt(boardSeq);
+	}
 }

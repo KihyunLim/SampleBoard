@@ -9,4 +9,6 @@ public interface BoardUploadService {
 	List<String> getBoardFiles(Integer boardSeq) throws Exception;
 	
 	void deleteFiles(Integer boardSeq) throws Exception;
+	
+	int getBoardFileCnt(Integer boardSeq) throws Exception;
 }

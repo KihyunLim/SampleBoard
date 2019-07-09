@@ -14,6 +14,7 @@ CREATE TABLE ATTACH(
 ) engine=InnoDB default character set = utf8;
 
 select * from attach;
+select count(fullname) from attach where boardseq=22;
 
 SELECT LAST_INSERT_ID();
 
@@ -45,7 +46,7 @@ CREATE TABLE BOARD(
 ) engine=InnoDB default character set = utf8;
 
 select * from board;
-select * from board where 1=1 and (title like '%수정%' or content like '%수정%');
+select a.seq, a.writer, a.title, a.content, a.regdate, a.cnt, (select count(fullname) from attach where boardseq=a.seq) as fCnt from board as a where 1=1 and (title like '%수정%' or content like '%은둑%');
 select * from board limit 2,2;
 
 SELECT 

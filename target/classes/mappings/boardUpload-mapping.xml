@@ -31,5 +31,14 @@
 		WHERE
 			BOARDSEQ = #{boardSeq};
 	</delete>
+	
+	<select id="getBoardFileCnt" resultType="int">
+		SELECT
+			COUNT(FULLNAME)
+		FROM
+			ATTACH
+		WHERE
+			BOARDSEQ = #{boardSeq};
+	</select>
 
 </mapper>

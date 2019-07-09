@@ -23,4 +23,8 @@ public class BoardUploadDAOMybatis {
 	public void deleteFiles(Integer boardSeq) throws Exception {
 		mybatis.delete("BoardUploadDAO.deleteFiles", boardSeq);
 	}
+	
+	public int getBoardFileCnt(Integer boardSeq) throws Exception {
+		return mybatis.selectOne("BoardUploadDAO.getBoardFileCnt", boardSeq);
+	}
 }
