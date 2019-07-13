@@ -40,5 +40,15 @@
 		WHERE
 			BOARDSEQ = #{boardSeq};
 	</select>
+	
+	<insert id="replaceFile">
+		INSERT INTO ATTACH (
+			FULLNAME,
+			BOARDSEQ
+		) VALUES (
+			#{fileName},
+			#{boardSeq}
+		);
+	</insert>
 
 </mapper>

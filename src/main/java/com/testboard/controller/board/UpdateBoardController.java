@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.testboard.biz.board.BoardService;
 import com.testboard.biz.board.BoardVO;
+import com.testboard.biz.boardUpload.BoardUploadService;
 
 @Controller
 public class UpdateBoardController {
@@ -20,10 +21,14 @@ public class UpdateBoardController {
 	@Autowired
 	private BoardService boardService;
 	
+	@Autowired
+	private BoardUploadService boardUploadService;
+	
 	@RequestMapping("/updateBoard.do")
 	@ResponseBody
 	public Map<String, Object> updateBoard(BoardVO vo) {
 		Map<String, Object> result = new HashMap<String, Object>();
+		String[] files = vo.getFiles();
 		
 		if(vo.getTitle() == null || vo.getTitle().equals("")) {
 			result.put("result", false);
@@ -39,6 +44,13 @@ public class UpdateBoardController {
 		
 		try {
 			boardService.updateBoard(vo);
+			boardUploadService.deleteFiles(vo.getSeq());
+			
+			if(files != null) {
+				for(String fileName : files) {
+					boardUploadService.replaceFile(fileName, vo.getSeq());
+				}
+			}
 			
 			result.put("result", true);
 			result.put("message", "게시글 수정에 성공했습니다.");

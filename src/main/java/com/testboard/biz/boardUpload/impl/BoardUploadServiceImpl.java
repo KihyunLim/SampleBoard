@@ -28,4 +28,8 @@ public class BoardUploadServiceImpl implements BoardUploadService {
 	public int getBoardFileCnt(Integer boardSeq) throws Exception {
 		return boardUploadDAO.getBoardFileCnt(boardSeq);
 	}
+	
+	public void replaceFile(String fileName, Integer boardSeq) throws Exception {
+		boardUploadDAO.replaceFile(fileName, boardSeq);
+	}
 }

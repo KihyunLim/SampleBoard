@@ -2,6 +2,94 @@
  * 
  */
 
+function uploadFile(formData) {
+	$.ajax({
+		url : "fileUpload.do",
+		data : formData,
+		dataType : "text",
+		processData : false,
+		contentType : false,
+		type : "POST",
+		success : function(data) {
+			console.log(data);
+			
+			if(data != "" && data != null && data != undefined) {
+				printFiles(data);
+			}
+		}
+	});
+};
+
+function printFiles(data) {
+	var fileInfo = getFileInfo(data);
+	console.log(fileInfo);
+	
+	$("#divFileWrap").append(
+			$("<div>").addClass("divItem").append(
+					$("<div>").append(
+							$("<img>").attr({src : fileInfo.imgSrc, width : "150px", height : "100px"})
+					),
+					$("<div>").append(
+							$("<a>").attr("href" , fileInfo.originalFileUrl).css("margin-right", "10px").html(fileInfo.originalFileName).addClass("aDisplayFile"),
+							$("<a>").attr("href" , fileInfo.fullName).html("삭제").addClass("aDeleteFile")
+					)
+			)
+	);
+};
+
+function deleteFile(url, that, mode) {
+	if(mode == "I") {
+		$.ajax({
+			url : url,
+			type : "POST",
+			data : {fileName : that.attr("href")},
+			dataType : "text",
+			success : function(result) {
+				console.log(result);
+				
+				if(result === "DELETED") {
+					alert("삭제되었습니다.");
+					that.parents(".divItem").remove();
+				}
+			}
+		});
+	} else if(mode == "M") {
+		that.parents(".divItem").remove();
+	} else {
+		alert("첨부파일 상태 확인 필요!!");
+	}
+};
+
+function getFileInfo(fullName) {
+	var originalFileName, imgSrc, originalFileUrl, uuidFileName;
+	
+	if(checkImageType(fullName)) {
+		imgSrc = "fileDisplay.do?fileName=" + fullName;
+		uuidFileName = fullName.substr(14);
+		var originalImg = fullName.substr(0,12) + fullName.substr(14);
+		
+		originalFileUrl = "fileDisplay.do?fileName=" + originalImg;
+	} else {
+		imgSrc = "resources/upload/files/fileIcon.png";
+		uuidFileName = fullName.substr(12);
+		originalFileUrl = "fileDisplay.do?fileName=" + fullName;
+	}
+	originalFileName = uuidFileName.substr(uuidFileName.indexOf("_") + 1);
+	
+	return {
+		originalFileName : originalFileName,
+		imgSrc : imgSrc,
+		originalFileUrl : originalFileUrl,
+		fullName : fullName
+	};
+};
+
+function checkImageType(fullName) {
+	var pattern = /jpg$|gif$|png$|jpeg$/i;
+	
+	return fullName.match(pattern);
+};
+
 $(function(){
 	/* 
 	 * 파일 업로드 관련 유틸 -----------
@@ -32,94 +120,6 @@ $(function(){
 			uploadFile(formData);
 		}
 	});
-	
-	$("#divFileWrap").on("click", ".aDeleteFile", function(e){
-		e.preventDefault();
-		
-		deleteFile("fileDelete.do", $(this));
-	});
-	
-	function uploadFile(formData) {
-		$.ajax({
-			url : "fileUpload.do",
-			data : formData,
-			dataType : "text",
-			processData : false,
-			contentType : false,
-			type : "POST",
-			success : function(data) {
-				console.log(data);
-				
-				if(data != "" && data != null && data != undefined) {
-					printFiles(data);
-				}
-			}
-		});
-	};
-	
-	function printFiles(data) {
-		var fileInfo = getFileInfo(data);
-		console.log(fileInfo);
-		
-		$("#divFileWrap").append(
-				$("<div>").addClass("divItem").append(
-						$("<div>").append(
-								$("<img>").attr({src : fileInfo.imgSrc, width : "150px", height : "100px"})
-						),
-						$("<div>").append(
-								$("<a>").attr("href" , fileInfo.originalFileUrl).css("margin-right", "10px").html(fileInfo.originalFileName).addClass("aDisplayFile"),
-								$("<a>").attr("href" , fileInfo.fullName).html("삭제").addClass("aDeleteFile")
-						)
-				)
-		);
-	};
-	
-	function deleteFile(url, that) {
-		$.ajax({
-			url : url,
-			type : "POST",
-			data : {fileName : that.attr("href")},
-			dataType : "text",
-			success : function(result) {
-				console.log(result);
-				
-				if(result === "DELETED") {
-					alert("삭제되었습니다.");
-					that.parents(".divItem").remove();
-				}
-			}
-		});
-	};
-	
-	function getFileInfo(fullName) {
-		var originalFileName, imgSrc, originalFileUrl, uuidFileName;
-		
-		if(checkImageType(fullName)) {
-			imgSrc = "fileDisplay.do?fileName=" + fullName;
-			uuidFileName = fullName.substr(14);
-			var originalImg = fullName.substr(0,12) + fullName.substr(14);
-			
-			originalFileUrl = "fileDisplay.do?fileName=" + originalImg;
-		} else {
-			imgSrc = "resources/upload/files/fileIcon.png";
-			uuidFileName = fullName.substr(12);
-			originalFileUrl = "fileDisplay.do?fileName=" + fullName;
-		}
-		originalFileName = uuidFileName.substr(uuidFileName.indexOf("_") + 1);
-		
-		return {
-			originalFileName : originalFileName,
-			imgSrc : imgSrc,
-			originalFileUrl : originalFileUrl,
-			fullName : fullName
-		};
-	};
-	
-	function checkImageType(fullName) {
-		var pattern = /jpg$|gif$|png$|jpeg$/i;
-		
-		return fullName.match(pattern);
-	};
 	
 	/* 
 	 * ----------- 파일 업로드 관련 유틸

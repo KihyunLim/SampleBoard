@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="<c:url value="/resources/js/lib/jquery-3.3.1.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/common.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/commonUploadFile.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/getBoard.js"/>"></script>
 <script type="text/javascript">
 	var loginId = "${userId}";
@@ -51,6 +52,17 @@
 			<tr>
 				<td bgcolor="orange">조회수</td>
 				<td align="left"><span id="cnt"></span></td>
+			</tr>
+			<tr>
+				<td rowspan="2" bgcolor="orange" width="70">업로드</td>
+				<td align="left">
+					<input type="file" name="uploadFile" id="inpUploadFile"></input>
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+					<div id="divFileWrap"></div>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">

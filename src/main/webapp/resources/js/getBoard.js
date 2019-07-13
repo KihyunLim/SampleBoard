@@ -30,6 +30,8 @@ $(function(){
 				$("#regDate").text(res.regDate);
 				$("#cnt").text(res.cnt);
 				
+				getBoardFiles();
+				
 				getBoardReplyList();
 			},
 			error : function(jqXHR, textSatus, errorThrown) {
@@ -39,10 +41,16 @@ $(function(){
 	};
 	
 	$("#btnUpdate").click(function(){
+		var arr = [];
+		$(".aDeleteFile").each(function(){
+			arr.push($(this).attr("href"));
+		});
+		
 		var data = {
 				"seq"			: seq,
 				"title" 		: $("#title").val(),
-				"content" 	: $("#content").val()
+				"content" 	: $("#content").val(),
+				"files"		: arr
 		};
 		
 		$.ajax({
@@ -69,29 +77,42 @@ $(function(){
 	$("#aDeleteBoard").click(function(e){
 		e.preventDefault();
 		
-		var data = {
+		var arr = [],
+			data = {
 				"seq" : seq
-		}
+		};
 		
-		$.ajax({
-			type : "POST",
-			url : "deleteBoard.do",
-			data : setParams(data, "OBJ"),
-			dataType : "json",
-			success : function(res, status, xhr) {
-				console.log(res);
-				
-				if(res.result) {
-					history.back();
-				} else {
-					alert(res.message);
-				}
-			},
-			error : function(jqXHR, textSatus, errorThrown) {
-				console.log("error!!");
-				console.log(errorThrown);
-			}
+		$(".aDeleteFile").each(function(){
+			arr.push($(this).attr("href"));
 		});
+		
+		if(arr.length > 0) {
+			$.post("deleteAll.do", {files:arr}, function(){});
+			$.ajax({
+				type : "POST",
+				url : "deleteAll.do",
+				data : {files : arr},
+				dataType : "text",
+				success : function(res) {
+					console.log(res);
+					
+					deleteBoard(data);
+				},
+				error : function(jqXHR, textSatus, errorThrown) {
+					console.log(errorThrown);
+					
+					alert("첨부파일 삭제에 실패했습니다.");
+				}
+			});
+		} else {
+			deleteBoard(data);
+		}
+	});
+	
+	$("#divFileWrap").on("click", ".aDeleteFile", function(e){
+		e.preventDefault();
+		
+		deleteFile("fileDelete.do", $(this), "M");
 	});
 	
 	$("#aGetBoardList").click(function(e){
@@ -177,6 +198,22 @@ $(function(){
 		requestDeleteReply(data);
 	});
 	
+	function getBoardFiles() {
+		$("#divFileWrap").empty();
+		
+		//이 컨트롤러 클래스 자체부터 매핑 경로를 지정안해놧기 때문에 아래 주석처럼 사용 못함
+//		$.getJSON("fileList/" + seq, function(list){
+		$.getJSON("getFileList.do?boardSeq=" + seq, function(list){
+			console.log(list);
+			
+			if(list.length > 0) {
+				list.forEach(function(item){
+					printFiles(item);
+				});
+			}
+		});
+	};
+	
 	function getBoardReplyList() {
 		var data = {
 				"boardSeq" : seq
@@ -247,6 +284,28 @@ $(function(){
 				console.log(errorThrown);
 				
 				alert("댓글 조회에 실패했습니다.");
+			}
+		});
+	};
+	
+	function deleteBoard(data) {
+		$.ajax({
+			type : "POST",
+			url : "deleteBoard.do",
+			data : setParams(data, "OBJ"),
+			dataType : "json",
+			success : function(res, status, xhr) {
+				console.log(res);
+				
+				if(res.result) {
+					history.back();
+				} else {
+					alert(res.message);
+				}
+			},
+			error : function(jqXHR, textSatus, errorThrown) {
+				console.log("error!!");
+				console.log(errorThrown);
 			}
 		});
 	};

@@ -11,4 +11,6 @@ public interface BoardUploadService {
 	void deleteFiles(Integer boardSeq) throws Exception;
 	
 	int getBoardFileCnt(Integer boardSeq) throws Exception;
+	
+	void replaceFile(String fileName, Integer boardSeq) throws Exception;
 }

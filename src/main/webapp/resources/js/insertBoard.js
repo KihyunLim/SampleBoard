@@ -22,6 +22,12 @@ $(function(){
 		registInsertBoard(data);
 	});
 	
+	$("#divFileWrap").on("click", ".aDeleteFile", function(e){
+		e.preventDefault();
+		
+		deleteFile("fileDelete.do", $(this), "I");
+	});
+	
 	function registInsertBoard(data) {
 		console.log(data);
 		

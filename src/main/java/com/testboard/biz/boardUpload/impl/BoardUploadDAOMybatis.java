@@ -1,6 +1,8 @@
 package com.testboard.biz.boardUpload.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +28,13 @@ public class BoardUploadDAOMybatis {
 	
 	public int getBoardFileCnt(Integer boardSeq) throws Exception {
 		return mybatis.selectOne("BoardUploadDAO.getBoardFileCnt", boardSeq);
+	}
+	
+	public void replaceFile(String fileName, Integer boardSeq) throws Exception {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("fileName", fileName);
+		paramMap.put("boardSeq", boardSeq);
+		
+		mybatis.insert("BoardUploadDAO.replaceFile", paramMap);
 	}
 }
