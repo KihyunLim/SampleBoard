@@ -53,13 +53,13 @@ public class InsertBoardController {
 		
 		try {
 			boardService.insertBoard(vo);
-			String[] files = vo.getFiles();
+			/*String[] files = vo.getFiles();
 			
 			if(files != null) {
 				for(String fileName : files) {
 					boardUploadService.addFile(fileName);
 				}
-			}
+			}*/
 			
 			result.put("result", true);
 			result.put("message", "게시글 등록에 성공했습니다.");

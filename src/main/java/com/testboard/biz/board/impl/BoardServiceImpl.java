@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.testboard.biz.board.BoardService;
 import com.testboard.biz.board.BoardVO;
+import com.testboard.biz.boardUpload.BoardUploadService;
 import com.testboard.biz.common.paging.Criteria;
 
 @Service("boardService")
@@ -15,8 +17,20 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDAOMybatis boardDAO;
 	
-	public void insertBoard(BoardVO vo) {
+	@Autowired
+	private BoardUploadService boardUploadService;
+	
+	@Transactional
+	public void insertBoard(BoardVO vo) throws Exception {
 		boardDAO.insertBoard(vo);
+		String[] files = vo.getFiles();
+		
+		if(files != null) {
+			for(String fileName : files) {
+//				boardUploadService.addFile(fileName);
+				boardUploadService.addFile(fileName);
+			}
+		}
 	}
 	
 	public void updateBoard(BoardVO vo) {

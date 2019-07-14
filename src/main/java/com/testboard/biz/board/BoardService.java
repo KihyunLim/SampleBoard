@@ -6,7 +6,7 @@ import com.testboard.biz.common.paging.Criteria;
 
 public interface BoardService {
 
-	void insertBoard(BoardVO vo);
+	void insertBoard(BoardVO vo) throws Exception;
 
 	void updateBoard(BoardVO vo);
 
